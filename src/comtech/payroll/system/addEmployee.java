@@ -379,6 +379,9 @@ PreparedStatement pst=null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      int ask=JOptionPane.showConfirmDialog(null,"DO you want to Add record ?","Add Record",JOptionPane.YES_NO_OPTION);
+      if(ask==0)
+      {
         if(txt_firstname.getText().trim().isEmpty() || 
             txt_surname.getText().trim().isEmpty()||
             txt_tel.getText().trim().isEmpty()||
@@ -451,9 +454,10 @@ PreparedStatement pst=null;
 
                 }
                  catch(Exception e){
-                   JOptionPane.showMessageDialog(null,e);
+                   
                 }
          }
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void r_maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_maleActionPerformed
@@ -614,6 +618,9 @@ PreparedStatement pst=null;
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+    int ask=JOptionPane.showConfirmDialog(null,"DO you want to Delete record ?","Delete Record",JOptionPane.YES_NO_OPTION);
+    if(ask==0)
+    {
         try{
                 String sql="delete from Staff_information where id=? ";
                 pst=conn.prepareStatement(sql);
@@ -638,10 +645,14 @@ PreparedStatement pst=null;
             }
                 
         }
+    }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+    int ask=JOptionPane.showConfirmDialog(null,"DO you want to Update record ?","Update Record",JOptionPane.YES_NO_OPTION);
+    if(ask==0)
+    {
         try
         {
             String var1=txt_id.getText();
@@ -686,7 +697,7 @@ PreparedStatement pst=null;
                 
             }
         }
-        
+    }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
