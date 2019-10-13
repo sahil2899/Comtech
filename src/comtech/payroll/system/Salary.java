@@ -6,15 +6,24 @@
 
 package comtech.payroll.system;
 
+import java.awt.*;
+import javax.swing.*;
+import java.sql.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author sahil mittal
  */
 public class Salary extends javax.swing.JFrame {
-
+Connection conn=null;
+PreparedStatement pst=null;
+ResultSet rs=null;
     /** Creates new form Salary */
     public Salary() {
         initComponents();
+        conn=db.java_db();
     }
 
     /** This method is called from within the constructor to
@@ -45,6 +54,11 @@ public class Salary extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
 
         txt_cal.setText("Calculate");
+        txt_cal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_calActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,6 +101,36 @@ public class Salary extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_calActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_calActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+            String sql="select Allowance.AddBonus as Allowance_addBonus ,Grade.HRA as Grade_HRA ,Grade.DA as Grade_DA ,Grade.Bonus as Grade_Bonus,"
+            + " SI.first_name,SI.salary as SI_salary from Staff_information SI \n" +
+            "Left outer join Grade On SI.GradeID=Grade.GradeID\n" +
+            "Left outer join Allowance On SI.id=Allowance.Emp_id ";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            
+            while(rs.next())
+            {
+            String SI_salary=rs.getString("SI_salary");
+            int salary=Integer.parseInt(SI_salary);
+            
+            String Grade_HRA=rs.getString("Grade_HRA");
+            int Hra=Integer.parseInt(Grade_HRA);
+            
+            String Allowance_addBonus=rs.getString("Allowance_addBonus");
+            int Bonus=Integer.parseInt(Allowance_addBonus);
+                   
+            }
+          }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_txt_calActionPerformed
 
     /**
      * @param args the command line arguments

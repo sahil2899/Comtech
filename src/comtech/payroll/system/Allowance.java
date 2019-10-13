@@ -80,10 +80,10 @@ public class Allowance extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        txt_da = new javax.swing.JTextField();
         txt_medical = new javax.swing.JTextField();
         txt_bonus = new javax.swing.JTextField();
         txt_hra = new javax.swing.JTextField();
-        txt_da = new javax.swing.JTextField();
         txt_hours = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -210,19 +210,20 @@ public class Allowance extends javax.swing.JFrame {
 
         jLabel26.setText("DA:");
 
+        txt_da.setEditable(false);
+
         txt_medical.setEditable(false);
 
         txt_bonus.setEditable(false);
 
         txt_hra.setEditable(false);
-
-        txt_da.setEditable(false);
-        txt_da.addActionListener(new java.awt.event.ActionListener() {
+        txt_hra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_daActionPerformed(evt);
+                txt_hraActionPerformed(evt);
             }
         });
 
+        txt_hours.setText("0");
         txt_hours.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_hoursActionPerformed(evt);
@@ -360,10 +361,10 @@ public class Allowance extends javax.swing.JFrame {
                                 .addGap(64, 64, 64)
                                 .addComponent(jLabel8))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txt_da, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                                .addComponent(txt_hra)
+                                .addComponent(txt_hra, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                                 .addComponent(txt_bonus)
                                 .addComponent(txt_medical)
+                                .addComponent(txt_da)
                                 .addComponent(txt_rate)
                                 .addComponent(txt_amount)))
                         .addGap(52, 52, 52)))
@@ -393,7 +394,7 @@ public class Allowance extends javax.swing.JFrame {
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(txt_add_medical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_hra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
@@ -406,7 +407,7 @@ public class Allowance extends javax.swing.JFrame {
                             .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
                             .addComponent(txt_add_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_hra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -417,7 +418,7 @@ public class Allowance extends javax.swing.JFrame {
                             .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
                             .addComponent(txt_add_da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_medical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -426,7 +427,7 @@ public class Allowance extends javax.swing.JFrame {
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
                     .addComponent(txt_add_hra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_medical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -467,33 +468,46 @@ public class Allowance extends javax.swing.JFrame {
         // TODO add your handling code here:
         try
         {
-            String sql="select * from staff_information where id=?";
+            String sql="select SI.ID as SI_ID,SI.first_name as SI_first_name,"
+                    + "SI.surname as SI_surname,SI.Dob as SI_Dob,SI.Salary as SI_Salary,SI.Department as SI_Department,"
+                    + "SI.GradeID as SI_GradeID,Grade.HRA as Grade_HRA ,Grade.DA as Grade_DA ,Grade.Bonus as Grade_Bonus,Grade.Medical as Grade_Medical"
+                    + " from Staff_information SI Left outer join Grade On SI.GradeID=Grade.GradeID where SI.id=?";
             pst=conn.prepareStatement(sql);
             pst.setString(1,txt_Search.getText());
             rs=pst.executeQuery();
             
-            String add1=rs.getString("id");
+            String add1=rs.getString("SI_ID");
             txt_empid.setText(add1);
             
-            String add2=rs.getString("first_name");
+            String add2=rs.getString("SI_first_name");
             txt_firstname.setText(add2);
             
-            String add3=rs.getString("surname");
+            String add3=rs.getString("SI_surname");
             txt_surname.setText(add3);
             
-            String add4=rs.getString("Dob");
+            String add4=rs.getString("SI_Dob");
             txt_dob.setText(add4);
             
-            String add5=rs.getString("Salary");
+            String add5=rs.getString("SI_Salary");
             txt_salary.setText(add5);
             
-            String add6=rs.getString("Department");
+            String add6=rs.getString("SI_Department");
             txt_department.setText(add6);
             
-           String add7=rs.getString("GradeID");
-           txt_grade.setText(add7);
+            String add7=rs.getString("SI_GradeID");
+             txt_grade.setText(add7);
             
+            String add8=rs.getString("Grade_HRA");
+            txt_hra.setText(add8);
             
+            String add9=rs.getString("Grade_DA");
+            txt_da.setText(add9);
+            
+            String add10=rs.getString("Grade_bonus");
+            txt_bonus.setText(add10);
+            
+            String add11=rs.getString("Grade_medical");
+            txt_medical.setText(add11);
         }
         catch(Exception e)
         {
@@ -517,19 +531,22 @@ public class Allowance extends javax.swing.JFrame {
         // TODO add your handling code here:
         try
         {
-            int value=Emp.empId;
-            String value1=txt_salary.getText();
-            String value2=txt_bonus.getText();
-            String value3=txt_medical.getText();
-            String value4=txt_da.getText();
-            String value5=txt_amount.getText();
-            String value6=txt_rate.getText();
-            String value7=lbl_total.getText();
-            String value8=txt_empid.getText();
-            String value9=txt_firstname.getText();
-            String value10=txt_surname.getText();
             
-            String sql="insert into Allowance (Created_by,Emp_id,Over_Time,Medical,Bonus,Other,Salary,Rate,Total_Allowance,Firstname,Surname) values  ('"+value+"','"+value8+"','"+value6+"','"+value3+"','"+value2+"','"+value4+"','"+value1+"','"+value5+"','"+value7+"','"+value9+"','"+value10+"')";
+            String Emp_id=txt_empid.getText();
+            String Hours=txt_hours.getText();
+            String Rate=txt_rate.getText();
+            String Amount=txt_amount.getText();
+            String Gift=txt_add_gift.getText();
+            String Add_hra=txt_add_hra.getText();
+            String Add_da=txt_add_da.getText();
+            String Add_bonus=txt_add_bonus.getText();
+            String Add_medical=txt_add_medical.getText();
+            String Total_allowance=lbl_total.getText();
+       
+            String sql="insert into Allowance (Emp_id,OverTimeHours,RatePerHour,OverTimeAmount,"
+                    + "Gift,AdditionalHRA,AdditionalDA,AdditionalBonus,AdditionalMedical,Total_Amount)"
+                    + " values  ('"+Emp_id+"','"+Hours+"','"+Rate+"','"+Amount+"','"+Gift+"','"+Add_hra+"',"
+                    + "'"+Add_da+"','"+Add_bonus+"','"+Add_medical+"','"+Total_allowance+"')";
             pst=conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Allowance is Added");
@@ -549,10 +566,10 @@ public class Allowance extends javax.swing.JFrame {
         txt_dob.setText("");
         txt_salary.setText("");
         txt_department.setText("");
-        txt_hra.setText("");
-        txt_da.setText("");
         txt_bonus.setText("");
+        txt_hra.setText("");
         txt_medical.setText("");
+        txt_da.setText("");
         txt_hours.setText("");
         txt_rate.setText("");
         txt_amount.setText("");
@@ -574,16 +591,15 @@ public class Allowance extends javax.swing.JFrame {
         pst=conn.prepareStatement(sql);
         pst.setString(1,txt_grade.getText());
         rs=pst.executeQuery();
-        
         int salary=Integer.parseInt(txt_salary.getText());
         int overtime=Integer.parseInt(txt_hours.getText());
-       
+        
         int eight=8;
         int days=26;
         int dbop=0;
         int rate=2;
         int total_overtime=overtime*rate;
-        dbop=salary/days/eight;
+        dbop=(salary/12)/days/eight;
         String x=String.valueOf(dbop);
         txt_rate.setText(x);
         int overtime_amount=total_overtime*dbop;
@@ -674,16 +690,16 @@ public class Allowance extends javax.swing.JFrame {
             rs=pst.executeQuery();
 
             String add1=rs.getString("HRA");
-            txt_hra.setText(add1);
+            txt_bonus.setText(add1);
 
             String add2=rs.getString("Medical");
-            txt_medical.setText(add2);
+            txt_da.setText(add2);
 
             String add3=rs.getString("Bonus");
-            txt_bonus.setText(add3);
+            txt_medical.setText(add3);
 
             String add4=rs.getString("SA");
-            txt_da.setText(add4);
+            txt_hra.setText(add4);
         }
         catch(Exception e)
         {
@@ -695,9 +711,9 @@ public class Allowance extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_SearchActionPerformed
 
-    private void txt_daActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_daActionPerformed
+    private void txt_hraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_daActionPerformed
+    }//GEN-LAST:event_txt_hraActionPerformed
 
     private void txt_hoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hoursActionPerformed
         // TODO add your handling code here:
