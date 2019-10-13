@@ -11,13 +11,34 @@ import java.sql.*;
 import java.util.*;
 import net.proteanit.sql.DbUtils;
 public class Allowance extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Allowance
-     */
+    Connection conn=null;
+    PreparedStatement pst=null;
+    ResultSet rs=null;
+    
     public Allowance() {
         initComponents();
+        conn=db.java_db();
+     //   Update_table();
+        
     }
+    //Code for connect the database tabel to Jframetable
+    
+//    private void Update_table()
+//    {
+//        try
+//        {
+//            String sql="select * from Allowance";
+//            pst=conn.prepareStatement(sql);
+//            rs=pst.executeQuery();
+//          //  table_allowance.setModel(DbUtils.resultSetToTableModel(rs));
+//            
+//        }
+//        catch(Exception e)
+//        {
+//            JOptionPane.showMessageDialog(null,e);
+//        }
+//       
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,31 +64,60 @@ public class Allowance extends javax.swing.JFrame {
         txt_dob = new javax.swing.JTextField();
         txt_salary = new javax.swing.JTextField();
         txt_department = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table_allowance = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        txt_overtime = new javax.swing.JTextField();
-        txt_medical = new javax.swing.JTextField();
-        txt_bonus = new javax.swing.JTextField();
-        txt_other = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txt_total_overtime = new javax.swing.JTextField();
         txt_rate = new javax.swing.JTextField();
+        txt_amount = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        lbl_total = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txt_grade = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        txt_medical = new javax.swing.JTextField();
+        txt_bonus = new javax.swing.JTextField();
+        txt_hra = new javax.swing.JTextField();
+        txt_da = new javax.swing.JTextField();
+        txt_hours = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txt_add_medical = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txt_add_bonus = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txt_add_da = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txt_add_hra = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txt_add_gift = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txt_all_date = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Employee ID:");
 
+        txt_Search.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txt_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_SearchActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("First Name:");
 
@@ -81,195 +131,585 @@ public class Allowance extends javax.swing.JFrame {
 
         jLabel7.setText("Department:");
 
+        txt_empid.setEditable(false);
+
+        txt_firstname.setEditable(false);
         txt_firstname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_firstnameActionPerformed(evt);
             }
         });
 
-        table_allowance.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(table_allowance);
+        txt_surname.setEditable(false);
 
-        jButton2.setText("Save");
+        txt_dob.setEditable(false);
 
-        jButton3.setText("Calculate");
+        txt_salary.setEditable(false);
 
-        jButton4.setText("Clear");
-
-        jLabel8.setText("Overtime:");
-
-        jLabel9.setText("Medical:");
-
-        jLabel10.setText("Bonus:");
-
-        jLabel11.setText("Other:");
-
-        txt_medical.addActionListener(new java.awt.event.ActionListener() {
+        txt_department.setEditable(false);
+        txt_department.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_medicalActionPerformed(evt);
+                txt_departmentActionPerformed(evt);
+            }
+        });
+        txt_department.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_departmentKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_departmentKeyReleased(evt);
             }
         });
 
-        jLabel12.setText("Total Overtime:");
+        jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jLabel13.setText("Rate per hour:");
+        jButton3.setText("Calculate");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Clear");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Rate Per hours:");
+
+        jLabel13.setText("Over Time Amount:");
+
+        txt_rate.setEditable(false);
+
+        txt_amount.setEditable(false);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Total Amount:");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel15.setText("0.00");
+        lbl_total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_total.setText("0.00");
+
+        jLabel17.setText("Grade:");
+
+        txt_grade.setEditable(false);
+
+        jLabel15.setText("Over Time Hour:");
+
+        jLabel23.setText("HRA :");
+
+        jLabel24.setText("Bonus :");
+
+        jLabel25.setText("Medical :");
+
+        jLabel26.setText("DA:");
+
+        txt_medical.setEditable(false);
+
+        txt_bonus.setEditable(false);
+
+        txt_hra.setEditable(false);
+
+        txt_da.setEditable(false);
+        txt_da.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_daActionPerformed(evt);
+            }
+        });
+
+        txt_hours.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_hoursActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("Addititonal Allowances");
+
+        jLabel9.setText("Addititonal Medical:");
+
+        txt_add_medical.setText("0");
+        txt_add_medical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_add_medicalActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Addititonal Bonus:");
+
+        txt_add_bonus.setText("0");
+        txt_add_bonus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_add_bonusActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Addititonal DA:");
+
+        txt_add_da.setText("0");
+
+        jLabel16.setText("Addititonal HRA:");
+
+        txt_add_hra.setText("0");
+
+        jLabel18.setText("Gift:");
+
+        txt_add_gift.setText("0");
+
+        jLabel19.setText("Allwance Date:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(547, 547, 547)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_Search))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel3))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_empid)
-                                            .addComponent(txt_firstname)
-                                            .addComponent(txt_surname, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
-                                        .addGap(26, 26, 26)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel11)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(txt_salary, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel17)
+                                                    .addComponent(jLabel7))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(txt_department)
+                                                        .addComponent(txt_grade, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(jLabel14))))
+                                        .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel5)
-                                            .addComponent(jLabel7))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_dob)
-                                            .addComponent(txt_salary)
-                                            .addComponent(txt_department, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))))
-                                .addGap(18, 18, 18)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txt_surname, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(176, 176, 176)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addGap(68, 68, 68))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jButton3)
+                                                    .addGap(45, 45, 45)
+                                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(270, 270, 270))
+                                                .addComponent(lbl_total, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(505, 505, 505)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
-                                    .addComponent(txt_overtime, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_other, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_medical, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel13)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txt_add_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txt_all_date, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_add_medical, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_add_gift, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_add_hra, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_add_da, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_empid, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel26)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_total_overtime, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                                .addComponent(txt_rate))
-                            .addComponent(jButton1))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_hours, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(64, 64, 64)
+                                .addComponent(jLabel8))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txt_da, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                .addComponent(txt_hra)
+                                .addComponent(txt_bonus)
+                                .addComponent(txt_medical)
+                                .addComponent(txt_rate)
+                                .addComponent(txt_amount)))
+                        .addGap(52, 52, 52)))
+                .addGap(56, 56, 56)
+                .addComponent(jButton1)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(14, 14, 14)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(txt_Search))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_empid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_overtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(txt_total_overtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(txt_medical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(txt_rate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(txt_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(txt_other, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txt_add_medical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
+                            .addComponent(txt_add_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_hra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(txt_add_da, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_bonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(txt_add_hra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_medical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel12)
+                    .addComponent(txt_rate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(txt_add_gift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_grade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_all_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_total, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_firstnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_firstnameActionPerformed
 
-    private void txt_medicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_medicalActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_medicalActionPerformed
+        try
+        {
+            String sql="select * from staff_information where id=?";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1,txt_Search.getText());
+            rs=pst.executeQuery();
+            
+            String add1=rs.getString("id");
+            txt_empid.setText(add1);
+            
+            String add2=rs.getString("first_name");
+            txt_firstname.setText(add2);
+            
+            String add3=rs.getString("surname");
+            txt_surname.setText(add3);
+            
+            String add4=rs.getString("Dob");
+            txt_dob.setText(add4);
+            
+            String add5=rs.getString("Salary");
+            txt_salary.setText(add5);
+            
+            String add6=rs.getString("Department");
+            txt_department.setText(add6);
+            
+           String add7=rs.getString("GradeID");
+           txt_grade.setText(add7);
+            
+            
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        finally
+        {
+            try
+            {
+                rs.close();
+                pst.close();
+            }
+            catch(Exception e)
+            {
+                
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+            int value=Emp.empId;
+            String value1=txt_salary.getText();
+            String value2=txt_bonus.getText();
+            String value3=txt_medical.getText();
+            String value4=txt_da.getText();
+            String value5=txt_amount.getText();
+            String value6=txt_rate.getText();
+            String value7=lbl_total.getText();
+            String value8=txt_empid.getText();
+            String value9=txt_firstname.getText();
+            String value10=txt_surname.getText();
+            
+            String sql="insert into Allowance (Created_by,Emp_id,Over_Time,Medical,Bonus,Other,Salary,Rate,Total_Allowance,Firstname,Surname) values  ('"+value+"','"+value8+"','"+value6+"','"+value3+"','"+value2+"','"+value4+"','"+value1+"','"+value5+"','"+value7+"','"+value9+"','"+value10+"')";
+            pst=conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"Allowance is Added");
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        txt_Search.setText("");
+        txt_empid.setText("");
+        txt_firstname.setText("");
+        txt_surname.setText("");
+        txt_dob.setText("");
+        txt_salary.setText("");
+        txt_department.setText("");
+        txt_hra.setText("");
+        txt_da.setText("");
+        txt_bonus.setText("");
+        txt_medical.setText("");
+        txt_hours.setText("");
+        txt_rate.setText("");
+        txt_amount.setText("");
+        txt_add_hra.setText("");
+        txt_add_da.setText("");
+        txt_add_bonus.setText("");
+        txt_add_medical.setText("");
+        txt_add_gift.setText("");
+        txt_all_date.setText("");
+        lbl_total.setText("");
+        txt_grade.setText("");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+        String sql="select * from Grade where GradeID=?";
+        pst=conn.prepareStatement(sql);
+        pst.setString(1,txt_grade.getText());
+        rs=pst.executeQuery();
+        
+        int salary=Integer.parseInt(txt_salary.getText());
+        int overtime=Integer.parseInt(txt_hours.getText());
+       
+        int eight=8;
+        int days=26;
+        int dbop=0;
+        int rate=2;
+        int total_overtime=overtime*rate;
+        dbop=salary/days/eight;
+        String x=String.valueOf(dbop);
+        txt_rate.setText(x);
+        int overtime_amount=total_overtime*dbop;
+        String x2=String.valueOf(overtime_amount);
+        txt_amount.setText(x2);
+        
+        String add1=rs.getString("DA");
+        double da=Integer.parseInt(add1);
+         
+        String add2=rs.getString("HRA");
+        double hra=Integer.parseInt(add2);
+        
+        String add3=rs.getString("Medical");
+        double medical=Integer.parseInt(add3);
+        
+        String add4=rs.getString("Bonus");
+        double bonus=Integer.parseInt(add4);
+        
+        double add_hra=Integer.parseInt(txt_add_hra.getText());
+        double add_da=Integer.parseInt(txt_add_da.getText());
+        double add_bonus=Integer.parseInt(txt_add_bonus.getText());
+        double add_medical=Integer.parseInt(txt_add_medical.getText());
+        double add_gift=Integer.parseInt(txt_add_gift.getText());
+        
+        double cal=hra+bonus+da+medical;
+        double additional_cal=add_hra+add_da+add_bonus+add_medical+add_gift;
+        double getcal=(salary/12)+cal+additional_cal+overtime_amount;
+        String total_allowance=String.valueOf(getcal);
+        lbl_total.setText(total_allowance);
+      
+//        double Hra_val=Integer.parseInt(txt_hra.getText());
+//        double medical_val=Integer.parseInt(txt_medical.getText());
+//        double sa_val=Integer.parseInt(txt_da.getText());
+//        double bonus_val=Integer.parseInt(txt_bonus.getText());
+//        
+//        double getcal_salary=salary/100 *(Hra_val+medical_val+sa_val+bonus_val) +salary;
+//        String new_sal=String.valueOf(getcal_salary);
+//        lbl_total.setText(new_sal);
+
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txt_departmentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_departmentKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txt_departmentKeyReleased
+
+    private void txt_departmentKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_departmentKeyPressed
+        // TODO add your handling code here:
+//        try
+//        {
+//
+//            String sql="select * from Grade where Category=?";
+//            pst=conn.prepareStatement(sql);
+//            pst.setString(1,txt_department.getText());
+//            rs=pst.executeQuery();
+//
+//            String add1=rs.getString("HRA");
+//            txt_hra.setText(add1);
+//
+//            String add2=rs.getString("Medical");
+//            txt_medical.setText(add2);
+//
+//            String add3=rs.getString("Bonus");
+//            txt_bonus.setText(add3);
+//
+//            String add4=rs.getString("DA");
+//            txt_da.setText(add4);
+//        }
+//        catch(Exception e)
+//        {
+//            JOptionPane.showMessageDialog(null,e);
+//        }
+    }//GEN-LAST:event_txt_departmentKeyPressed
+
+    private void txt_departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_departmentActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+
+            String sql="select * from Employee_Grade where Category=?";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1,txt_department.getText());
+            rs=pst.executeQuery();
+
+            String add1=rs.getString("HRA");
+            txt_hra.setText(add1);
+
+            String add2=rs.getString("Medical");
+            txt_medical.setText(add2);
+
+            String add3=rs.getString("Bonus");
+            txt_bonus.setText(add3);
+
+            String add4=rs.getString("SA");
+            txt_da.setText(add4);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_txt_departmentActionPerformed
+
+    private void txt_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_SearchActionPerformed
+
+    private void txt_daActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_daActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_daActionPerformed
+
+    private void txt_hoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hoursActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hoursActionPerformed
+
+    private void txt_add_medicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_add_medicalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_add_medicalActionPerformed
+
+    private void txt_add_bonusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_add_bonusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_add_bonusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,7 +758,15 @@ public class Allowance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -326,20 +774,27 @@ public class Allowance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable table_allowance;
+    private javax.swing.JLabel lbl_total;
     private javax.swing.JTextField txt_Search;
+    private javax.swing.JTextField txt_add_bonus;
+    private javax.swing.JTextField txt_add_da;
+    private javax.swing.JTextField txt_add_gift;
+    private javax.swing.JTextField txt_add_hra;
+    private javax.swing.JTextField txt_add_medical;
+    private javax.swing.JTextField txt_all_date;
+    private javax.swing.JTextField txt_amount;
     private javax.swing.JTextField txt_bonus;
+    private javax.swing.JTextField txt_da;
     private javax.swing.JTextField txt_department;
     private javax.swing.JTextField txt_dob;
     private javax.swing.JTextField txt_empid;
     private javax.swing.JTextField txt_firstname;
+    private javax.swing.JTextField txt_grade;
+    private javax.swing.JTextField txt_hours;
+    private javax.swing.JTextField txt_hra;
     private javax.swing.JTextField txt_medical;
-    private javax.swing.JTextField txt_other;
-    private javax.swing.JTextField txt_overtime;
     private javax.swing.JTextField txt_rate;
     private javax.swing.JTextField txt_salary;
     private javax.swing.JTextField txt_surname;
-    private javax.swing.JTextField txt_total_overtime;
     // End of variables declaration//GEN-END:variables
 }
