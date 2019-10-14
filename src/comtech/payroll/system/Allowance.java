@@ -99,7 +99,7 @@ public class Allowance extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         txt_all_date = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -376,10 +376,11 @@ public class Allowance extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(txt_Search))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_Search, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -471,7 +472,7 @@ public class Allowance extends javax.swing.JFrame {
             String sql="select SI.ID as SI_ID,SI.first_name as SI_first_name,"
                     + "SI.surname as SI_surname,SI.Dob as SI_Dob,SI.Salary as SI_Salary,SI.Department as SI_Department,"
                     + "SI.GradeID as SI_GradeID,Grade.HRA as Grade_HRA ,Grade.DA as Grade_DA ,Grade.Bonus as Grade_Bonus,Grade.Medical as Grade_Medical"
-                    + " from Staff_information SI Left outer join Grade On SI.GradeID=Grade.GradeID where SI.id=?";
+                    + " from Staff_information SI Left outer join Grade On SI.GradeID=Grade.GradeDescription where SI.id=?";
             pst=conn.prepareStatement(sql);
             pst.setString(1,txt_Search.getText());
             rs=pst.executeQuery();
@@ -570,14 +571,14 @@ public class Allowance extends javax.swing.JFrame {
         txt_hra.setText("");
         txt_medical.setText("");
         txt_da.setText("");
-        txt_hours.setText("");
+        txt_hours.setText("0");
         txt_rate.setText("");
         txt_amount.setText("");
-        txt_add_hra.setText("");
-        txt_add_da.setText("");
-        txt_add_bonus.setText("");
-        txt_add_medical.setText("");
-        txt_add_gift.setText("");
+        txt_add_hra.setText("0");
+        txt_add_da.setText("0");
+        txt_add_bonus.setText("0");
+        txt_add_medical.setText("0");
+        txt_add_gift.setText("0");
         txt_all_date.setText("");
         lbl_total.setText("");
         txt_grade.setText("");
@@ -587,7 +588,7 @@ public class Allowance extends javax.swing.JFrame {
         // TODO add your handling code here:
         try
         {
-        String sql="select * from Grade where GradeID=?";
+        String sql="select * from Grade where GradeDescription=?";
         pst=conn.prepareStatement(sql);
         pst.setString(1,txt_grade.getText());
         rs=pst.executeQuery();

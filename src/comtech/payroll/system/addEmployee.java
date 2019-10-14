@@ -67,31 +67,31 @@ PreparedStatement pst=null;
                 }
          }
      }
-     private int getGradeId(String GradeDescription)
-     {
-        int gradeid=0;
-        
-        try{
-            String sql1 ="select GradeID from Grade where GradeDescription='"+GradeDescription+"'";
-            pst=conn.prepareStatement(sql1);
-            rs=pst.executeQuery();
-            gradeid=rs.getInt("GradeID");
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Unable to fetch Grade ID for given GradeDescription");
-        }
-        finally {
-            try{
-                rs.close();
-                pst.close();
-            }
-            catch(Exception e){
-                  JOptionPane.showMessageDialog(null, e);
-                }
-            return gradeid;
-         }        
-     }
+//     private int getGradeId(String GradeDescription)
+//     {
+//        int gradeid=0;
+//        
+//        try{
+//            String sql1 ="select GradeID from Grade where GradeDescription='"+GradeDescription+"'";
+//            pst=conn.prepareStatement(sql1);
+//            rs=pst.executeQuery();
+//            gradeid=rs.getInt("GradeID");
+//        }
+//        catch(Exception e)
+//        {
+//            JOptionPane.showMessageDialog(null, "Unable to fetch Grade ID for given GradeDescription");
+//        }
+//        finally {
+//            try{
+//                rs.close();
+//                pst.close();
+//            }
+//            catch(Exception e){
+//                  JOptionPane.showMessageDialog(null, e);
+//                }
+//            return gradeid;
+//         }        
+//     }
      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -144,7 +144,7 @@ PreparedStatement pst=null;
         jLabel19 = new javax.swing.JLabel();
         txt_grade = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formKeyReleased(evt);
@@ -239,6 +239,11 @@ PreparedStatement pst=null;
 
         jLabel18.setText("Search Employee:");
 
+        txt_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_searchActionPerformed(evt);
+            }
+        });
         txt_search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_searchKeyReleased(evt);
@@ -261,7 +266,7 @@ PreparedStatement pst=null;
 
         jLabel1.setText("Emp_id:");
 
-        txt_dep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Purchase", "Sales", "IT" }));
+        txt_dep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Purchase", "IT", "Sales" }));
 
         jLabel19.setText("Grade:");
 
@@ -364,13 +369,13 @@ PreparedStatement pst=null;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_apt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
@@ -485,7 +490,8 @@ PreparedStatement pst=null;
                         + "(first_name,surname,Dob,Email,"
                         + "Telephone,Address,Department,"
                         + "Image,Salary,Gender,Address2,"
-                        + "Post_code, Designation,Status,job_title,Apartment,Date_hired,GradeId) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+                        + "Post_code, Designation,Status,job_title,Apartment,"
+                        + "Date_hired,GradeID) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 
                 pst=conn.prepareStatement(sql);
                 pst.setString(1,txt_firstname.getText());
@@ -506,17 +512,18 @@ PreparedStatement pst=null;
                 pst.setString(15,txt_job.getText());
                 pst.setString(16,txt_apt.getText());
                 pst.setString(17,txt_doj.getText());
-                try{
-                String gradedesc=txt_grade.getSelectedItem().toString();
-                int gradeid=getGradeId(gradedesc);
-                JOptionPane.showMessageDialog(null,gradeid);
-                }
-                catch(Exception e)
-                {
-                    JOptionPane.showMessageDialog(null,e);
-
-                }
-                pst.setInt(18,1);
+                pst.setString(18,txt_grade.getSelectedItem().toString());
+//                try{
+//                String gradedesc=txt_grade.getSelectedItem().toString();
+//                int gradeid=getGradeId(gradedesc);
+//                JOptionPane.showMessageDialog(null,gradeid);
+//                }
+//                catch(Exception e)
+//                {
+//                    JOptionPane.showMessageDialog(null,e);
+//
+//                }
+//                pst.setInt(18,1);
                 //JOptionPane.showMessageDialog(null,gradeid);
                               
 
@@ -527,7 +534,7 @@ PreparedStatement pst=null;
             catch (Exception e)
 
             {
-                JOptionPane.showMessageDialog(null,"Record is not added due to pst execute block");
+                JOptionPane.showMessageDialog(null,e);
             }
         
             finally {
@@ -656,22 +663,22 @@ PreparedStatement pst=null;
                 String add7 =rs.getString("Address");
                 txt_address.setText(add7);
 
-                String add8 =rs.getString("Department");
-                switch(add8)
+                String add9 =rs.getString("Department");
+                switch(add9)
                 {
                     case "Purchase":
                     {
                         txt_dep.setSelectedIndex(0);
                         break;
                     }
-                    case "Sales":
+                    case "IT":
                     {
                         txt_dep.setSelectedIndex(1);
                         break;
                     }
-                    case "IT":
+                    case "Sales":
                     {
-                        txt_dep.setSelectedIndex(3);
+                        txt_dep.setSelectedIndex(2);
                         break;
                     }
                     
@@ -701,27 +708,22 @@ PreparedStatement pst=null;
                 String add17 =rs.getString("Designation");
                 txt_design.setText(add17);
                 
-                String add18=rs.getString("Grade");
+                String add18=rs.getString("GradeID");
                 switch(add18)
                 {
-                    case "A":
+                    case "Trainee":
                     {
                         txt_grade.setSelectedIndex(0);
                         break;
                     }
-                    case "B":
+                    case "Senior":
                     {
                         txt_grade.setSelectedIndex(1);
                         break;
                     }
-                    case "C":
+                    case "Manager":
                     {
-                        txt_grade.setSelectedIndex(3);
-                        break;
-                    }
-                    case "D":
-                    {
-                        txt_grade.setSelectedIndex(3);
+                        txt_grade.setSelectedIndex(2);
                         break;
                     }
                 }
@@ -815,6 +817,7 @@ PreparedStatement pst=null;
             String var15=txt_job.getText();
             String var16=txt_status.getText();
             String var17=txt_grade.getSelectedItem().toString();
+//          String var18=person_image.getBytes();
             
             String sql="update staff_information set id='"+var1+"',first_name='"+var2+"',surname='"+var3+"',Dob='"+var4+"',Email='"+var5+"',Telephone='"+var6+"',Address='"+var7+"',Address2='"+var8+"',Apartment='"+var9+"',Post_code='"+var10
                     +"',Department='"+var11+"',Designation='"+var12+"',Date_hired='"+var13+"',Salary='"+var14+"',job_title='"+var15+"',Status='"+var16+"' where id='"+var1+"' ";
@@ -849,6 +852,10 @@ PreparedStatement pst=null;
                
 
     }//GEN-LAST:event_txt_gradeActionPerformed
+
+    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_searchActionPerformed
 
     /**
      * @param args the command line arguments
