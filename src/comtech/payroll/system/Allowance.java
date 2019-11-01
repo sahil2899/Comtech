@@ -477,6 +477,8 @@ public class Allowance extends javax.swing.JFrame {
             pst.setString(1,txt_Search.getText());
             rs=pst.executeQuery();
             
+            if(rs.next())
+            {
             String add1=rs.getString("SI_ID");
             txt_empid.setText(add1);
             
@@ -509,6 +511,7 @@ public class Allowance extends javax.swing.JFrame {
             
             String add11=rs.getString("Grade_medical");
             txt_medical.setText(add11);
+        }
         }
         catch(Exception e)
         {
@@ -592,6 +595,8 @@ public class Allowance extends javax.swing.JFrame {
         pst=conn.prepareStatement(sql);
         pst.setString(1,txt_grade.getText());
         rs=pst.executeQuery();
+        if(rs.next())
+        {
         int salary=Integer.parseInt(txt_salary.getText());
         int overtime=Integer.parseInt(txt_hours.getText());
         
@@ -640,6 +645,7 @@ public class Allowance extends javax.swing.JFrame {
 //        String new_sal=String.valueOf(getcal_salary);
 //        lbl_total.setText(new_sal);
 
+        }
         }
         catch(Exception e)
         {

@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package comtech.payroll.system;
-import java.sql.Connection;
+import java.awt.event.*;
+import java.awt.*;
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import javax.swing.*;
@@ -15,34 +17,18 @@ import java.util.GregorianCalendar;
  * @author sahil mittal
  */
 public class login extends javax.swing.JFrame {
-    Connection conn=null;
-    ResultSet rs=null;
-    PreparedStatement pst=null;
-    private ImageIcon icon;
-    
+Connection conn=null;
+ResultSet rs=null;
+PreparedStatement pst=null;
+
+    /**
+     * Creates new form login_gradient
+     */
     public login() {
         initComponents();
         conn=db.java_db();
-       // currentDate();
+        this.icon2.setVisible(false);
     }
-    
-    /*public void currentDate()
-    {
-        Calendar cal=new GregorianCalendar();
-        int day=cal.get(Calendar.DAY_OF_MONTH);
-        int month=cal.get(Calendar.MONTH);
-        int year=cal.get(Calendar.YEAR);
-        lbl_date.setText(day+"/"+(month+1)+"/"+year);
-        
-        int hour=cal.get(Calendar.HOUR);
-        int minute=cal.get(Calendar.MINUTE);
-        int second=cal.get(Calendar.SECOND);
-        lbl_time.setText(hour+":"+minute+":"+second);
-        
-        
-        
-        
-    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,118 +39,180 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        eye2 = new javax.swing.JLabel();
+        kGradientPanel1 = new keeptoo.KGradientPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         txt_username = new javax.swing.JTextField();
-        lbl_username = new javax.swing.JLabel();
-        lbl_password = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         txt_password = new javax.swing.JPasswordField();
-        kButton1 = new keeptoo.KButton();
+        icon1 = new javax.swing.JLabel();
+        icon2 = new javax.swing.JLabel();
+        button = new keeptoo.KButton();
         txt_combo = new javax.swing.JComboBox<>();
-        show_password = new javax.swing.JCheckBox();
-        login_icon = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel1.setText("Hi,Welcome to");
+
+        jLabel5.setText("jLabel5");
+
+        eye2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                eye2MousePressed(evt);
+            }
+        });
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        kGradientPanel1.setkBorderRadius(0);
+        kGradientPanel1.setkEndColor(new java.awt.Color(0, 204, 204));
+        kGradientPanel1.setkGradientFocus(600);
+        kGradientPanel1.setkStartColor(new java.awt.Color(153, 0, 153));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel7.setText("Hi,Welcome to");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Your Payroll System");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel10.setText("LOGIN");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, 20));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel6.setText("Username");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 58, -1, -1));
+
         txt_username.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_username.setForeground(new java.awt.Color(204, 204, 204));
-        txt_username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(153, 153, 153)));
-        txt_username.setOpaque(false);
-        txt_username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_usernameActionPerformed(evt);
+        txt_username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(12, 91, 160)));
+        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 84, 206, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel9.setText("Password");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 154, -1, -1));
+
+        txt_password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(12, 91, 160)));
+        jPanel1.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 186, 206, -1));
+
+        icon1.setIcon(new javax.swing.ImageIcon("C:\\Users\\sahil mittal\\Documents\\NetBeansProjects\\comtech payroll system\\src\\comtech\\payroll\\system\\images\\eye (1).png")); // NOI18N
+        icon1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                icon1MousePressed(evt);
             }
         });
-        jPanel1.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 230, -1));
+        jPanel1.add(icon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
 
-        lbl_username.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_username.setForeground(new java.awt.Color(204, 204, 204));
-        lbl_username.setText("Username");
-        jPanel1.add(lbl_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 90, 20));
-
-        lbl_password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_password.setForeground(new java.awt.Color(204, 204, 204));
-        lbl_password.setText("Password");
-        jPanel1.add(lbl_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 70, 20));
-
-        txt_password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_password.setForeground(new java.awt.Color(204, 204, 204));
-        txt_password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 3, 0, new java.awt.Color(153, 153, 153)));
-        txt_password.setOpaque(false);
-        txt_password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_passwordActionPerformed(evt);
+        icon2.setIcon(new javax.swing.ImageIcon("C:\\Users\\sahil mittal\\Documents\\NetBeansProjects\\comtech payroll system\\src\\comtech\\payroll\\system\\images\\hide.png")); // NOI18N
+        icon2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                icon2MousePressed(evt);
             }
         });
-        jPanel1.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 230, -1));
+        jPanel1.add(icon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
 
-        kButton1.setText("LogIn");
-        kButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        kButton1.setkBackGroundColor(new java.awt.Color(51, 153, 255));
-        kButton1.setkEndColor(new java.awt.Color(51, 153, 255));
-        kButton1.setkHoverEndColor(new java.awt.Color(0, 153, 255));
-        kButton1.setkHoverForeGround(new java.awt.Color(51, 153, 255));
-        kButton1.setkHoverStartColor(new java.awt.Color(51, 153, 255));
-        kButton1.setkPressedColor(new java.awt.Color(51, 153, 255));
-        kButton1.setkSelectedColor(new java.awt.Color(51, 153, 255));
-        kButton1.setkStartColor(new java.awt.Color(51, 153, 255));
-        kButton1.addActionListener(new java.awt.event.ActionListener() {
+        button.setText("LOGIN");
+        button.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        button.setkBorderRadius(0);
+        button.setkEndColor(new java.awt.Color(153, 0, 153));
+        button.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        button.setkHoverStartColor(new java.awt.Color(0, 153, 204));
+        button.setkSelectedColor(new java.awt.Color(0, 153, 204));
+        button.setkStartColor(new java.awt.Color(0, 153, 204));
+        button.setMaximumSize(new java.awt.Dimension(75, 29));
+        button.setMinimumSize(new java.awt.Dimension(75, 29));
+        button.setName(""); // NOI18N
+        button.setNextFocusableComponent(button);
+        button.setRequestFocusEnabled(false);
+        button.setRolloverEnabled(false);
+        button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kButton1ActionPerformed(evt);
+                buttonActionPerformed(evt);
             }
         });
-        jPanel1.add(kButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 120, -1));
+        jPanel1.add(button, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 120, -1));
 
-        txt_combo.setBackground(new java.awt.Color(204, 204, 204));
+        txt_combo.setBackground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.selectionBackground"));
         txt_combo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_combo.setForeground(new java.awt.Color(102, 102, 102));
+        txt_combo.setForeground(new java.awt.Color(0, 153, 204));
         txt_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Employee" }));
+        txt_combo.setBorder(null);
         txt_combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_comboActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 70, -1));
+        jPanel1.add(txt_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 210, -1));
 
-        show_password.setBackground(new java.awt.Color(204, 204, 204));
-        show_password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        show_password.setForeground(new java.awt.Color(102, 102, 102));
-        show_password.setText("Show Password ");
-        show_password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_passwordActionPerformed(evt);
-            }
-        });
-        jPanel1.add(show_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 130, 20));
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\sahil mittal\\Documents\\NetBeansProjects\\comtech payroll system\\src\\comtech\\payroll\\system\\images\\clerk (1).png")); // NOI18N
 
-        login_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/comtech/payroll/system/images/erp-v-accounting-software.jpg"))); // NOI18N
-        jPanel1.add(login_icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 460));
+        javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
+        kGradientPanel1.setLayout(kGradientPanel1Layout);
+        kGradientPanel1Layout.setHorizontalGroup(
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+        kGradientPanel1Layout.setVerticalGroup(
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void kButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton1ActionPerformed
-
-        
+    private void buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionPerformed
+       
         String sql="select id,username,password,division from Users where (username=? and password=? and division=?)";
         try{
             int count=0;
 
-            pst=conn.prepareStatement(sql);
+         pst=conn.prepareStatement(sql);
 
             pst.setString(1,txt_username.getText());
             pst.setString(2,txt_password.getText());
@@ -206,31 +254,30 @@ public class login extends javax.swing.JFrame {
 
             }
         }
-          
-    }//GEN-LAST:event_kButton1ActionPerformed
+    }//GEN-LAST:event_buttonActionPerformed
 
     private void txt_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_comboActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_comboActionPerformed
 
-    private void show_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_passwordActionPerformed
-        if(show_password.isSelected())
-        {
-            txt_password.setEchoChar((char)0);
-        }
-        else
-        {
-            txt_password.setEchoChar('*');
-        }
-    }//GEN-LAST:event_show_passwordActionPerformed
-
-    private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
+    private void eye2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eye2MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_passwordActionPerformed
+        
+    }//GEN-LAST:event_eye2MousePressed
 
-    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
+    private void icon1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icon1MousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_usernameActionPerformed
+        icon2.setVisible(true);
+        icon1.setVisible(false);
+        txt_password.setEchoChar((char)0);
+    }//GEN-LAST:event_icon1MousePressed
+
+    private void icon2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_icon2MousePressed
+        // TODO add your handling code here:
+        icon1.setVisible(true);
+        icon2.setVisible(false);
+        txt_password.setEchoChar('*');
+    }//GEN-LAST:event_icon2MousePressed
 
     /**
      * @param args the command line arguments
@@ -268,12 +315,20 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private keeptoo.KButton button;
+    private javax.swing.JLabel eye2;
+    private javax.swing.JLabel icon1;
+    private javax.swing.JLabel icon2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private keeptoo.KButton kButton1;
-    private javax.swing.JLabel lbl_password;
-    private javax.swing.JLabel lbl_username;
-    private javax.swing.JLabel login_icon;
-    private javax.swing.JCheckBox show_password;
+    private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JComboBox<String> txt_combo;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;

@@ -15,7 +15,7 @@ public class db {
     
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn=DriverManager.getConnection("jdbc:sqlite:C:\\Users\\sahil mittal\\Documents\\NetBeansProjects\\Comtech Payroll System\\comtechdb.db");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/comtechdb?zeroDateTimeBehavior=convertToNull","root","");
             return conn;
         }catch(Exception e)
         {
