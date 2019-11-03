@@ -165,7 +165,7 @@
           <SubComponents>
             <Component class="rojerusan.RSMaterialButtonRectangle" name="rSMaterialButtonRectangle3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add Employee"/>
+                <Property name="text" type="java.lang.String" value="Employee Management"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>

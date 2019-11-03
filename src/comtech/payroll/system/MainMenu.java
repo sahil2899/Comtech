@@ -104,7 +104,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        rSMaterialButtonRectangle3.setText("Add Employee");
+        rSMaterialButtonRectangle3.setText("Employee Management");
         rSMaterialButtonRectangle3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rSMaterialButtonRectangle3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,7 +176,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void rSMaterialButtonRectangle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle3ActionPerformed
         // TODO add your handling code here:
-        addEmployee add=new addEmployee();
+        Add_Employee add=new Add_Employee();
         add.setVisible(true);
     }//GEN-LAST:event_rSMaterialButtonRectangle3ActionPerformed
 
