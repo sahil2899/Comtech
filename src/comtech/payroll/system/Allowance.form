@@ -179,7 +179,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txt_firstname" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="jLabel23" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_add_medical" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txt_hra" alignment="3" min="-2" max="-2" attributes="0"/>

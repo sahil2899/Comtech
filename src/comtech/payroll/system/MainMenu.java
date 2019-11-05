@@ -30,30 +30,23 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        lbl_emp = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         rSButtonIconD1 = new rojerusan.RSButtonIconD();
+        jLabel1 = new javax.swing.JLabel();
+        lbl_emp = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle6 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle5 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle4 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle7 = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Admin id:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 500, -1, 23));
-
-        lbl_emp.setForeground(new java.awt.Color(204, 204, 204));
-        lbl_emp.setText("emp");
-        jPanel1.add(lbl_emp, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 504, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(23, 35, 51));
 
@@ -82,12 +75,26 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Admin id:");
+
+        lbl_emp.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_emp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_emp.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_emp.setText("0");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(871, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 772, Short.MAX_VALUE)
                 .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -95,7 +102,10 @@ public class MainMenu extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_emp))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -111,7 +121,7 @@ public class MainMenu extends javax.swing.JFrame {
                 rSMaterialButtonRectangle3ActionPerformed(evt);
             }
         });
-        jPanel2.add(rSMaterialButtonRectangle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+        jPanel2.add(rSMaterialButtonRectangle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         rSMaterialButtonRectangle2.setText("Update Salary");
         rSMaterialButtonRectangle2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -129,7 +139,7 @@ public class MainMenu extends javax.swing.JFrame {
                 rSMaterialButtonRectangle6ActionPerformed(evt);
             }
         });
-        jPanel2.add(rSMaterialButtonRectangle6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        jPanel2.add(rSMaterialButtonRectangle6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
 
         rSMaterialButtonRectangle5.setText("Deduction");
         rSMaterialButtonRectangle5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -138,7 +148,7 @@ public class MainMenu extends javax.swing.JFrame {
                 rSMaterialButtonRectangle5ActionPerformed(evt);
             }
         });
-        jPanel2.add(rSMaterialButtonRectangle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
+        jPanel2.add(rSMaterialButtonRectangle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, -1, -1));
 
         rSMaterialButtonRectangle4.setText("Allowances");
         rSMaterialButtonRectangle4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -148,6 +158,15 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(rSMaterialButtonRectangle4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
+
+        rSMaterialButtonRectangle7.setText("Add Employee");
+        rSMaterialButtonRectangle7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rSMaterialButtonRectangle7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle7ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(rSMaterialButtonRectangle7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 890, 490));
 
@@ -176,8 +195,8 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void rSMaterialButtonRectangle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle3ActionPerformed
         // TODO add your handling code here:
-        Add_Employee add=new Add_Employee();
-        add.setVisible(true);
+        Search_Employee add1=new Search_Employee();
+        add1.setVisible(true);
     }//GEN-LAST:event_rSMaterialButtonRectangle3ActionPerformed
 
     private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
@@ -198,9 +217,15 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void rSMaterialButtonRectangle4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle4ActionPerformed
         // TODO add your handling code here:
-        Allowance allowance=new Allowance();
+        Allowances allowance=new Allowances();
         allowance.setVisible(true);
     }//GEN-LAST:event_rSMaterialButtonRectangle4ActionPerformed
+
+    private void rSMaterialButtonRectangle7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle7ActionPerformed
+        // TODO add your handling code here:
+        Add_Employee add3=new Add_Employee();
+        add3.setVisible(true);
+    }//GEN-LAST:event_rSMaterialButtonRectangle7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,5 +275,6 @@ public class MainMenu extends javax.swing.JFrame {
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle4;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle5;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle6;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle7;
     // End of variables declaration//GEN-END:variables
 }

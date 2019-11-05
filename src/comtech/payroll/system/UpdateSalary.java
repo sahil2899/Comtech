@@ -298,7 +298,8 @@ public class UpdateSalary extends javax.swing.JFrame {
             pst = conn.prepareStatement(sql);
             pst.setString(1, txt_search.getText());
             rs = pst.executeQuery();
-
+        if(rs.next())
+        {
             String add1 = rs.getString("id");
             txt_empid.setText(add1);
 
@@ -316,7 +317,8 @@ public class UpdateSalary extends javax.swing.JFrame {
 
             String add6 = rs.getString("Salary");
             txt_salary.setText(add6);
-
+        }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

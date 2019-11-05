@@ -90,7 +90,8 @@ ResultSet rs=null;
             String sql="select SI.salary as SI_salary,Grade.HRA as Grade_HRA ,"
                     + "Grade.DA as Grade_DA ,Grade.Bonus as Grade_Bonus,"
                     + "Grade.Medical as Grade_Medical,Allowance.AdditionalHRA as Hra,"
-                    + "Allowance.AdditionalBonus as Bonus,Allowance.AdditionalMedical as Medical,Allowance.OverTimeAmount as OverAmount,Allowance.Gift as Gift,Allowance.AdditionalDA as Da,"
+                    + "Allowance.AdditionalBonus as Bonus,Allowance.AdditionalMedical as Medical,"
+                    + "Allowance.OverTimeAmount as OverAmount,Allowance.Gift as Gift,Allowance.AdditionalDA as Da,"
                     + "SI.id as SI_id from Staff_information SI \n" +
                     "Left outer join Grade On SI.GradeID=Grade.GradeDescription\n" +
                     "Left outer join Allowance On SI.id=Allowance.Emp_id ";
@@ -139,6 +140,7 @@ ResultSet rs=null;
                     + " values ('"+id+"','"+salary+"','"+Hra2+"','"+Da2+"','"+Medical2+"','"+Bonus2+"','"+Bonus1+"','"+Hra1+"','"+Da1+"','"+OverAmount1+"','"+Gift1+"','"+Medical1+"')";
             pst=conn.prepareStatement(sql1);
             pst.execute();
+            JOptionPane.showMessageDialog(null,"Salary for all employee is calculated");
             }
         }
         catch(Exception e)

@@ -390,7 +390,7 @@ public class Allowance extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23)
                     .addComponent(jLabel9)
                     .addComponent(txt_add_medical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_hra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -528,36 +528,6 @@ public class Allowance extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        try
-        {
-            
-            String Emp_id=txt_empid.getText();
-            String Hours=txt_hours.getText();
-            String Rate=txt_rate.getText();
-            String Amount=txt_amount.getText();
-            String Gift=txt_add_gift.getText();
-            String Add_hra=txt_add_hra.getText();
-            String Add_da=txt_add_da.getText();
-            String Add_bonus=txt_add_bonus.getText();
-            String Add_medical=txt_add_medical.getText();
-            String Total_allowance=lbl_total.getText();
-       
-            String sql="insert into Allowance (Emp_id,OverTimeHours,RatePerHour,OverTimeAmount,"
-                    + "Gift,AdditionalHRA,AdditionalDA,AdditionalBonus,AdditionalMedical,Total_Amount)"
-                    + " values  ('"+Emp_id+"','"+Hours+"','"+Rate+"','"+Amount+"','"+Gift+"','"+Add_hra+"',"
-                    + "'"+Add_da+"','"+Add_bonus+"','"+Add_medical+"','"+Total_allowance+"')";
-            pst=conn.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null,"Allowance is Added");
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -731,6 +701,36 @@ public class Allowance extends javax.swing.JFrame {
     private void txt_add_bonusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_add_bonusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_add_bonusActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+
+            String Emp_id=txt_empid.getText();
+            String Hours=txt_hours.getText();
+            String Rate=txt_rate.getText();
+            String Amount=txt_amount.getText();
+            String Gift=txt_add_gift.getText();
+            String Add_hra=txt_add_hra.getText();
+            String Add_da=txt_add_da.getText();
+            String Add_bonus=txt_add_bonus.getText();
+            String Add_medical=txt_add_medical.getText();
+            String Total_allowance=lbl_total.getText();
+
+            String sql="insert into Allowance (Emp_id,OverTimeHours,RatePerHour,OverTimeAmount,"
+            + "Gift,AdditionalHRA,AdditionalDA,AdditionalBonus,AdditionalMedical,Total_Amount)"
+            + " values  ('"+Emp_id+"','"+Hours+"','"+Rate+"','"+Amount+"','"+Gift+"','"+Add_hra+"',"
+            + "'"+Add_da+"','"+Add_bonus+"','"+Add_medical+"','"+Total_allowance+"')";
+            pst=conn.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"Allowance is Added");
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
