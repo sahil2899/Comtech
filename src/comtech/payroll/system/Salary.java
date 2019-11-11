@@ -61,7 +61,7 @@ ResultSet rs=null;
                 .addComponent(txt_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(435, Short.MAX_VALUE))
+                .addContainerGap(683, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txt_cal)
@@ -74,12 +74,12 @@ ResultSet rs=null;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 422, Short.MAX_VALUE)
                 .addComponent(txt_cal)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(706, 349));
+        setSize(new java.awt.Dimension(954, 526));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -92,7 +92,8 @@ ResultSet rs=null;
                     + "Grade.Medical as Grade_Medical,Allowance.AdditionalHRA as Hra,"
                     + "Allowance.AdditionalBonus as Bonus,Allowance.AdditionalMedical as Medical,"
                     + "Allowance.OverTimeAmount as OverAmount,Allowance.Gift as Gift,Allowance.AdditionalDA as Da,"
-                    + "SI.id as SI_id from Staff_information SI \n" +
+                    + "SI.id as SI_id "
+                    + "from Staff_informations SI \n" +
                     "Left outer join Grade On SI.GradeID=Grade.GradeDescription\n" +
                     "Left outer join Allowance On SI.id=Allowance.Emp_id ";
             pst=conn.prepareStatement(sql);
@@ -136,8 +137,7 @@ ResultSet rs=null;
             String OverAmount=rs.getString("OverAmount");
             int OverAmount1=Integer.parseInt(OverAmount);
             
-            String sql1="insert into Salary(EmpID,Basic_Salary,Grade_Hra,Grade_Da,Grade_Medical,Grade_Bonus,Allowance_Bonus,Allowance_HRA,Allowance_DA,Allowance_OverAmt,Allowance_Gift,Allowance_Medical)"
-                    + " values ('"+id+"','"+salary+"','"+Hra2+"','"+Da2+"','"+Medical2+"','"+Bonus2+"','"+Bonus1+"','"+Hra1+"','"+Da1+"','"+OverAmount1+"','"+Gift1+"','"+Medical1+"')";
+            String sql1="insert into Salary(EmpID,Basic_Salary,Grade_Hra,Grade_Da,Grade_Medical,Grade_Bonus,Allowance_Bonus,Allowance_HRA,Allowance_DA,Allowance_OverAmt,Allowance_Gift,Allowance_Medical) values ('"+id+"','"+salary+"','"+Hra2+"','"+Da2+"','"+Medical2+"','"+Bonus2+"','"+Bonus1+"','"+Hra1+"','"+Da1+"','"+OverAmount1+"','"+Gift1+"','"+Medical1+"')";
             pst=conn.prepareStatement(sql1);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Salary for all employee is calculated");

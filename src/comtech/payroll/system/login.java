@@ -221,6 +221,8 @@ PreparedStatement pst=null;
             while(rs.next())
             {
                 int id=rs.getInt(1);
+                String name=rs.getString(2);
+                Emp.empusername=name;
                 Emp.empId=id;
                 count=count+1;
             }
@@ -229,7 +231,7 @@ PreparedStatement pst=null;
             {
                 if(count==1)
                 {
-                    JOptionPane.showMessageDialog(null,"successfully Login");
+//                    JOptionPane.showMessageDialog(null,"successfully Login");
                     MainMenu j=new MainMenu();
                     j.setVisible(true);
                     this.dispose();

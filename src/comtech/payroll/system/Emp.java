@@ -8,4 +8,5 @@ package comtech.payroll.system;
 public class Emp {
     
     public static int empId;
+    public static String empusername;
 }

@@ -17,7 +17,8 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         
-        lbl_emp.setText(String.valueOf(Emp.empId).toString());
+//        lbl_emp.setText(String.valueOf(Emp.empId).toString());
+        lbl_emp.setText(Emp.empusername);
     }
 
     /**
@@ -44,6 +45,9 @@ public class MainMenu extends javax.swing.JFrame {
         rSMaterialButtonRectangle7 = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFocusTraversalPolicyProvider(true);
+        setResizable(false);
 
         jPanel1.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -78,12 +82,12 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Admin id:");
+        jLabel1.setText("Admin :");
 
         lbl_emp.setBackground(new java.awt.Color(255, 255, 255));
         lbl_emp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_emp.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_emp.setText("0");
+        lbl_emp.setText("Name");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -93,8 +97,8 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 772, Short.MAX_VALUE)
+                .addComponent(lbl_emp, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 723, Short.MAX_VALUE)
                 .addComponent(rSButtonIconD1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -223,6 +227,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void rSMaterialButtonRectangle7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle7ActionPerformed
         // TODO add your handling code here:
+       
         Add_Employee add3=new Add_Employee();
         add3.setVisible(true);
     }//GEN-LAST:event_rSMaterialButtonRectangle7ActionPerformed

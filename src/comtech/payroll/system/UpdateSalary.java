@@ -293,7 +293,7 @@ public class UpdateSalary extends javax.swing.JFrame {
         employee details will  fetch from database and show to follwing fields
          */
         try {
-            String sql = "select * from Staff_information where id=?";
+            String sql = "select * from Staff_informations where id=?";
 
             pst = conn.prepareStatement(sql);
             pst.setString(1, txt_search.getText());
@@ -347,7 +347,7 @@ public class UpdateSalary extends javax.swing.JFrame {
             String value1=txt_empid.getText();
             String value2=txt_salary.getText();
             
-            String sql="update Staff_information set id='"+value1+"',Salary='"+value2+"' where id='"+value1+"' ";
+            String sql="update Staff_informations set id='"+value1+"',Salary='"+value2+"' where id='"+value1+"' ";
             pst=conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Update is successfuly done");

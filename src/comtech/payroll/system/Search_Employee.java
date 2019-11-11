@@ -113,7 +113,7 @@ finally
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Adobe Arabic", 1, 14))); // NOI18N
@@ -607,7 +607,7 @@ int ask=JOptionPane.showConfirmDialog(null,"DO you want to Delete record ?","Del
     if(ask==0)
     {
         try{
-                String sql="delete from Staff_information where id=? ";
+                String sql="delete from Staff_informations where id=? ";
                 pst=conn.prepareStatement(sql);
                 pst.setString(1,txt_id.getText());
                 pst.execute();
@@ -680,7 +680,7 @@ int ask=JOptionPane.showConfirmDialog(null,"DO you want to Delete record ?","Del
             String var17=txt_grade.getSelectedItem().toString();
 //          String var18=person_image.getBytes();
             
-            String sql="update staff_information set id='"+var1+"',first_name='"+var2+"',surname='"+var3+"',Dob='"+var4+"',Email='"+var5+"',Telephone='"+var6+"',Address='"+var7+"',Address2='"+var8+"',Apartment='"+var9+"',Post_code='"+var10
+            String sql="update staff_informations set id='"+var1+"',first_name='"+var2+"',surname='"+var3+"',Dob='"+var4+"',Email='"+var5+"',Telephone='"+var6+"',Address='"+var7+"',Address2='"+var8+"',Apartment='"+var9+"',Post_code='"+var10
                     +"',Department='"+var11+"',Date_hired='"+var13+"',Salary='"+var14+"',Status='"+var16+"' where id='"+var1+"' ";
             pst=conn.prepareStatement(sql);
             pst.execute();
@@ -739,7 +739,7 @@ int ask=JOptionPane.showConfirmDialog(null,"DO you want to Delete record ?","Del
     try
     {
            
-    String sql="select * from Staff_information where id=?";
+    String sql="select * from Staff_informations where id=?";
             
     pst=conn.prepareStatement(sql);
     pst.setString(1,txt_search.getText());

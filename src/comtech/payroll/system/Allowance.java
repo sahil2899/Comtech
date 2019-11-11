@@ -470,7 +470,7 @@ public class Allowance extends javax.swing.JFrame {
             String sql="select SI.ID as SI_ID,SI.first_name as SI_first_name,"
                     + "SI.surname as SI_surname,SI.Dob as SI_Dob,SI.Salary as SI_Salary,SI.Department as SI_Department,"
                     + "SI.GradeID as SI_GradeID,Grade.HRA as Grade_HRA ,Grade.DA as Grade_DA ,Grade.Bonus as Grade_Bonus,Grade.Medical as Grade_Medical"
-                    + " from Staff_information SI Left outer join Grade On SI.GradeID=Grade.GradeDescription where SI.id=?";
+                    + " from Staff_informations SI Left outer join Grade On SI.GradeID=Grade.GradeDescription where SI.id=?";
             pst=conn.prepareStatement(sql);
             pst.setString(1,txt_Search.getText());
             rs=pst.executeQuery();
