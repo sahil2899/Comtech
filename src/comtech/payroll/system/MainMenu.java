@@ -211,7 +211,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void rSMaterialButtonRectangle6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle6ActionPerformed
         // TODO add your handling code here:
-        Salary sal=new Salary();
+        salary_cal sal=new salary_cal();
         sal.setVisible(true);
     }//GEN-LAST:event_rSMaterialButtonRectangle6ActionPerformed
 

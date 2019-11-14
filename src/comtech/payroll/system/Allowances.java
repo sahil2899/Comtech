@@ -8,21 +8,20 @@ package comtech.payroll.system;
 import java.awt.*;
 import javax.swing.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import net.proteanit.sql.DbUtils;
-
 public class Allowances extends javax.swing.JFrame {
     Connection conn=null;
     PreparedStatement pst=null;
     ResultSet rs=null;
-
-    public Allowances() 
+    public Allowances()
     {
         initComponents();
         conn=db.java_db();
-     //   Update_table();
-        
+        // Update_table();
     }
+    
 //Code for connect the database tabel to Jframetable
     
 //    private void Update_table()
@@ -75,7 +74,6 @@ public class Allowances extends javax.swing.JFrame {
         txt_medical = new javax.swing.JTextField();
         txt_bonus = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txt_all_date = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         txt_add_hra = new javax.swing.JTextField();
         txt_add_da = new javax.swing.JTextField();
@@ -101,6 +99,7 @@ public class Allowances extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        txt_all_date = new com.toedter.calendar.JDateChooser();
 
         lbl_total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_total.setText("0.00");
@@ -505,6 +504,8 @@ public class Allowances extends javax.swing.JFrame {
             }
         });
 
+        txt_all_date.setDateFormatString("d MMM yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -515,11 +516,11 @@ public class Allowances extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_all_date))
+                                .addComponent(txt_all_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -547,7 +548,7 @@ public class Allowances extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11)
                     .addComponent(txt_all_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -599,7 +600,9 @@ public class Allowances extends javax.swing.JFrame {
         {
 
             String Emp_id=txt_empid.getText();
-            String all_date=txt_all_date.getText();
+//            String all_date=txt_all_date.getText();
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            String all_date=sdf.format(txt_all_date.getDate());
             String Hours=txt_hours.getText();
             String Rate=txt_rate.getText();
             String Amount=txt_amount.getText();
@@ -714,7 +717,7 @@ public class Allowances extends javax.swing.JFrame {
         txt_add_bonus.setText("0");
         txt_add_medical.setText("0");
         txt_add_gift.setText("0");
-        txt_all_date.setText("");
+        txt_all_date.setDate(null);
         lbl_total.setText("");
         txt_grade.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -873,7 +876,7 @@ public class Allowances extends javax.swing.JFrame {
     private javax.swing.JTextField txt_add_gift;
     private javax.swing.JTextField txt_add_hra;
     private javax.swing.JTextField txt_add_medical;
-    private javax.swing.JTextField txt_all_date;
+    private com.toedter.calendar.JDateChooser txt_all_date;
     private javax.swing.JTextField txt_amount;
     private javax.swing.JTextField txt_bonus;
     private javax.swing.JTextField txt_da;

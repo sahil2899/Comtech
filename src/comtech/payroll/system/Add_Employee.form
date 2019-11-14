@@ -49,9 +49,9 @@
           <Group type="102" attributes="0">
               <EmptySpace pref="836" max="32767" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="txt_emp" min="-2" pref="58" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
@@ -76,7 +76,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -230,11 +230,11 @@
                                       <Component id="txt_surname" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txt_dob" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_dob" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -495,7 +495,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="txt_dob">
+        <Component class="com.toedter.calendar.JDateChooser" name="txt_dob">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="d MMM yyyy"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -515,9 +518,5 @@
         <Property name="text" type="java.lang.String" value="Name"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JSplitPane" name="jSplitPane1">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
-    </Container>
   </SubComponents>
 </Form>
