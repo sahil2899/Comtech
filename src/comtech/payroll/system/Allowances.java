@@ -91,6 +91,8 @@ public class Allowances extends javax.swing.JFrame {
         txt_rate = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         txt_amount = new javax.swing.JTextField();
+        txt_total_overtime = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         lbl_total1 = new javax.swing.JLabel();
@@ -366,6 +368,10 @@ public class Allowances extends javax.swing.JFrame {
 
         txt_amount.setEditable(false);
 
+        txt_total_overtime.setEditable(false);
+
+        jLabel24.setText("Total overtime");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -398,9 +404,13 @@ public class Allowances extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_rate, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel22)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel24))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_total_overtime, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -434,21 +444,29 @@ public class Allowances extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(txt_rate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_total_overtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total Allowance", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jLabel19.setText("Allowance");
 
+        lbl_total1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_total1.setForeground(new java.awt.Color(102, 204, 255));
         lbl_total1.setText("0.00");
 
         jLabel21.setText("Additional Allowance");
 
+        lbl_total2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_total2.setForeground(new java.awt.Color(102, 153, 255));
         lbl_total2.setText("0.00");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -639,17 +657,23 @@ public class Allowances extends javax.swing.JFrame {
         if(rs.next())
         {
         int salary=Integer.parseInt(txt_salary.getText());
+        int sal=salary/12;
         int overtime=Integer.parseInt(txt_hours.getText());
         
         int eight=8;
         int days=26;
         int dbop=0;
-        int rate=2;
-        int total_overtime=overtime*rate;
-        dbop=(salary/12)/days/eight;
-        String x=String.valueOf(dbop);
+        double rate=1.5;
         
-        int overtime_amount=total_overtime*dbop;
+        double total_overtime=overtime*rate;
+        String x1=String.valueOf(total_overtime);
+        txt_total_overtime.setText(x1);
+        
+        dbop=sal/days/eight;
+        String x=String.valueOf(dbop);
+        txt_rate.setText(x);
+        
+        double overtime_amount=total_overtime*dbop;
         String x2=String.valueOf(overtime_amount);
         txt_amount.setText(x2);
         
@@ -856,6 +880,7 @@ public class Allowances extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -892,5 +917,6 @@ public class Allowances extends javax.swing.JFrame {
     private javax.swing.JTextField txt_salary;
     private javax.swing.JTextField txt_search;
     private javax.swing.JTextField txt_surname;
+    private javax.swing.JTextField txt_total_overtime;
     // End of variables declaration//GEN-END:variables
 }

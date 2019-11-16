@@ -43,6 +43,7 @@ public class MainMenu extends javax.swing.JFrame {
         rSMaterialButtonRectangle5 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle4 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle7 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle8 = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -145,14 +146,14 @@ public class MainMenu extends javax.swing.JFrame {
         });
         jPanel2.add(rSMaterialButtonRectangle6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
 
-        rSMaterialButtonRectangle5.setText("Deduction");
+        rSMaterialButtonRectangle5.setText("pay slip");
         rSMaterialButtonRectangle5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rSMaterialButtonRectangle5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSMaterialButtonRectangle5ActionPerformed(evt);
             }
         });
-        jPanel2.add(rSMaterialButtonRectangle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, -1, -1));
+        jPanel2.add(rSMaterialButtonRectangle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
 
         rSMaterialButtonRectangle4.setText("Allowances");
         rSMaterialButtonRectangle4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -171,6 +172,15 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(rSMaterialButtonRectangle7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+
+        rSMaterialButtonRectangle8.setText("Deduction");
+        rSMaterialButtonRectangle8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rSMaterialButtonRectangle8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle8ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(rSMaterialButtonRectangle8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 890, 490));
 
@@ -216,7 +226,10 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_rSMaterialButtonRectangle6ActionPerformed
 
     private void rSMaterialButtonRectangle5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle5ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:9
+        searchEmpSalarySlip slip=new searchEmpSalarySlip();
+        slip.setVisible(true);
+                
     }//GEN-LAST:event_rSMaterialButtonRectangle5ActionPerformed
 
     private void rSMaterialButtonRectangle4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle4ActionPerformed
@@ -231,6 +244,10 @@ public class MainMenu extends javax.swing.JFrame {
         Add_Employee add3=new Add_Employee();
         add3.setVisible(true);
     }//GEN-LAST:event_rSMaterialButtonRectangle7ActionPerformed
+
+    private void rSMaterialButtonRectangle8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSMaterialButtonRectangle8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,5 +298,6 @@ public class MainMenu extends javax.swing.JFrame {
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle5;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle6;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle7;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle8;
     // End of variables declaration//GEN-END:variables
 }

@@ -172,15 +172,15 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txt_doj" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txt_salary" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txt_status" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txt_dep" alignment="0" pref="160" max="32767" attributes="0"/>
                                       <Component id="txt_grade" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_doj" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="35" max="32767" attributes="0"/>
                           <Component id="jDesktopPane1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
@@ -207,10 +207,10 @@
                                       <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txt_status" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txt_doj" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txt_doj" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
@@ -442,8 +442,6 @@
             <Property name="text" type="java.lang.String" value="Date Hired :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_doj">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
             <Property name="text" type="java.lang.String" value="Basic Salary :"/>
@@ -496,6 +494,11 @@
           </SubComponents>
         </Container>
         <Component class="com.toedter.calendar.JDateChooser" name="txt_dob">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="d MMM yyyy"/>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="txt_doj">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="d MMM yyyy"/>
           </Properties>

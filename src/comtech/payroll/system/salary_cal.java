@@ -8,9 +8,10 @@ package comtech.payroll.system;
 import java.awt.*;
 import javax.swing.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
-
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author sahil mittal
@@ -26,6 +27,23 @@ public class salary_cal extends javax.swing.JFrame {
     public salary_cal() {
         initComponents();
         conn=db.java_db();
+        Update_table();
+    }
+    private void Update_table()
+    {
+        try
+        {
+            String sql="select * from Salary_cal";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+           table_salary.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+       
     }
 
     /**
@@ -38,9 +56,12 @@ public class salary_cal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        salary_date = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_salary = new javax.swing.JTable();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -53,7 +74,9 @@ public class salary_cal extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Generate Salary For All Employees", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         jLabel1.setText("Salary Cal_date");
 
@@ -64,47 +87,104 @@ public class salary_cal extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salary_date, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(salary_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(20, 20, 20))
+        );
+
+        table_salary.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(table_salary);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(434, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+//String sql="SELECT SUM(Allowance.Allowances) as sum,SUM(Allowance.Add_Allowance)AS \"sum_add\""
+//                    + ",SI.id as SI_id,SI.Salary as SI_Salary,Allowance.Allowances as Allowance_Allowances,Allowance.Add_Allowance as Allowance_Add_Allowance "
+//                    + "FROM Staff_informations SI "
+//                    + "Left outer join Allowance On (SI.id=Allowance.Emp_id)"
+//                    + " GROUP BY id";
         try
         {
-            String sql="SELECT SUM(Allowance.Allowances) as sum,SUM(Allowance.Add_Allowance)AS \"sum_add\""
-                    + ",SI.id as SI_id,SI.Salary as SI_Salary,Allowance.Allowances as Allowance_Allowances,Allowance.Add_Allowance as Allowance_Add_Allowance "
-                    + "FROM Staff_informations SI "
-                    + "Left outer join Allowance On (SI.id=Allowance.Emp_id)"
-                    + " GROUP BY id";
+            String sql="SELECT SUM(Allowance.Allowances) as sum,"
+            +"SUM(Allowance.Add_Allowance)AS sum_add,"
+            +"SUM(Allowance.AdditionalMedical) as A_medical,"
+            +"SUM(Allowance.AdditionalBonus) as A_bonus ,"
+            +"SUM(Allowance.AdditionalHRA) as  A_hra ,"
+            +"SUM(Allowance.AdditionalDA) as A_da,"
+            +"SI.id as SI_id,SI.Salary as SI_Salary ,"
+            +"Allowance.Allowances as Allowance_Allowances,"
+            +"Allowance.Add_Allowance as Allowance_Add_Allowance,"
+            +"Allowance.AdditionalMedical as Allowance_AdditionalMedical ,"
+            +"Allowance.AdditionalBonus as Allowance_AdditionalBonus,"
+            +"Allowance.AdditionalHRA as Allowance_AdditionalHra,"
+            +"Allowance.AdditionalDA as Allowance_AdditionalDA "
+            +"FROM Staff_informations SI " 
+            +"Left outer join Allowance On (SI.id=Allowance.Emp_id) "
+            +"GROUP BY id";
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             while(rs.next())
             {
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                String date=sdf.format(salary_date.getDate());
+               
                 String SI_id=rs.getString("SI_id");
                 int id=Integer.parseInt(SI_id);
                 
@@ -112,17 +192,31 @@ public class salary_cal extends javax.swing.JFrame {
                 int salary_cal=Integer.parseInt(SI_Salary);
                 int salary_month=salary_cal/12;
                 
+                String Allowance_AdditionalMedical=rs.getString("A_Medical");
+                int medical_cal=Integer.parseInt(Allowance_AdditionalMedical);
+                
+                String Allowance_AdditionalBonus=rs.getString("A_Bonus");
+                int bonus_cal=Integer.parseInt(Allowance_AdditionalBonus);
+                
+                String Allowance_AdditionalHra=rs.getString("A_hra");
+                int hra_cal=Integer.parseInt(Allowance_AdditionalHra);
+                
+                String Allowance_AdditionalDA=rs.getString("A_da");
+                int da_cal=Integer.parseInt(Allowance_AdditionalDA);
+                
                 String Allowance_Allowances=rs.getString("sum");
                 int Allowance_cal=Integer.parseInt(Allowance_Allowances);
             
                 String Allowance_Add_Allowance=rs.getString("sum_add");
                 int Allowance_Add_cal=Integer.parseInt(Allowance_Add_Allowance);
              
-                String sql1="insert into Salary_cal(id,Salary_monthly,Total_allowance,Total_add)values ('"+id+"','"+salary_month+"','"+Allowance_cal+"','"+Allowance_Add_cal+"')";
+                String sql1="insert into Salary_cal(Salary_Date,Emp_id,Salary_monthly,AdditionalMedical,"
+                        + "AdditionalBonus,AdditionalHRA,AdditionalDA,Total_allowance,Total_add) values ('"+date+"','"+id+"','"+salary_month+"','"+medical_cal+"','"+bonus_cal+"','"+hra_cal+"','"+da_cal+"','"+Allowance_cal+"','"+Allowance_Add_cal+"')";
                 pst=conn.prepareStatement(sql1);
                 pst.execute();
             }
             JOptionPane.showMessageDialog(null,"Salary for all employee is calculated");
+            this.dispose();
         }
         catch(Exception e)
         {
@@ -169,6 +263,9 @@ public class salary_cal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser salary_date;
+    private javax.swing.JTable table_salary;
     // End of variables declaration//GEN-END:variables
 }

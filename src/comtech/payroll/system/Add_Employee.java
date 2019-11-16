@@ -120,7 +120,6 @@ private void Fillcombo()
         jLabel17 = new javax.swing.JLabel();
         txt_status = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        txt_doj = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txt_salary = new javax.swing.JTextField();
         cmd_save = new javax.swing.JButton();
@@ -128,6 +127,7 @@ private void Fillcombo()
         jDesktopPane1 = new javax.swing.JDesktopPane();
         img = new javax.swing.JLabel();
         txt_dob = new com.toedter.calendar.JDateChooser();
+        txt_doj = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         txt_emp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -245,6 +245,8 @@ private void Fillcombo()
 
         txt_dob.setDateFormatString("d MMM yyyy");
 
+        txt_doj.setDateFormatString("d MMM yyyy");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -308,12 +310,12 @@ private void Fillcombo()
                                     .addComponent(jLabel19))
                                 .addGap(28, 28, 28)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_doj)
                                     .addComponent(txt_salary)
                                     .addComponent(txt_status)
                                     .addComponent(txt_dep, 0, 160, Short.MAX_VALUE)
-                                    .addComponent(txt_grade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_grade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_doj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29))))
         );
@@ -334,10 +336,10 @@ private void Fillcombo()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel17)
                                     .addComponent(txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel18)
-                                    .addComponent(txt_doj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_doj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel18)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
@@ -453,163 +455,6 @@ private void Fillcombo()
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void r_maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_maleActionPerformed
-        gender="Male";
-        r_male.setSelected(true);
-        r_female.setSelected(false);  
-    }//GEN-LAST:event_r_maleActionPerformed
-
-    private void r_femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_femaleActionPerformed
-        gender="Female";
-        r_female.setSelected(true);
-        r_male.setSelected(false);   
-    }//GEN-LAST:event_r_femaleActionPerformed
-
-    private void txt_firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_firstnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_firstnameActionPerformed
-
-    private void txt_aptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_aptActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_aptActionPerformed
-
-    private void txt_salaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_salaryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_salaryActionPerformed
-
-    private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
-        // TODO add your handling code here:
-        if(txt_firstname.getText().trim().isEmpty() || 
-        txt_surname.getText().trim().isEmpty()||
-        txt_tel.getText().trim().isEmpty()||
-        //txt_dob.getText().trim().isEmpty()||
-        txt_email.getText().trim().isEmpty()|| 
-        txt_tel.getText().trim().isEmpty()||
-        txt_address.getText().trim().isEmpty()||
-        //r_male.getSelectedIcon().trim().isEmpty()||
-        //person_image.imageicon().trim().isEmpty()||
-        //gender.getText().trim().isEmpty()||
-        txt_salary.getText().trim().isEmpty()||
-        txt_pc.getText().trim().isEmpty()||
-        txt_status.getText().trim().isEmpty()||
-        txt_apt.getText().trim().isEmpty()||
-        txt_doj.getText().trim().isEmpty())  
-        {
-            JOptionPane.showMessageDialog(this,"Fields are  Empty");
-            return;
-        }
-        int ask=JOptionPane.showConfirmDialog(null,"Do you want to Add Employee ?","Add Employee",JOptionPane.YES_NO_OPTION);
-        if(ask==0)     
-        {
-             //Sql command for add record in the fields
-            try 
-            {
-                String sql ="insert into Staff_informations" 
-                + "(first_name,surname,Dob,Email,"
-                + "Telephone,Address,Department,"
-                + "Image,Salary,Gender,Address2,"
-                + "Post_code,Status,Apartment,"
-                + "Date_hired,GradeID) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-                pst=conn.prepareStatement(sql);
-                pst.setString(1,txt_firstname.getText());
-                pst.setString(2,txt_surname.getText());
-                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-                String date=sdf.format(txt_dob.getDate());
-                pst.setString(3,date);
-                pst.setString(4,txt_email.getText());
-                pst.setString(5,txt_tel.getText());
-                pst.setString(6,txt_address.getText());
-                pst.setString(7,txt_dep.getSelectedItem().toString());
-                pst.setBytes(8,person_image);
-                pst.setString(9,txt_salary.getText());
-                pst.setString(10,gender);
-                pst.setString(11,txt_add2.getText());
-                pst.setString(12,txt_pc.getText());
-                pst.setString(13,txt_status.getText());
-                pst.setString(14,txt_apt.getText());
-                pst.setString(15,txt_doj.getText());
-                pst.setString(16,txt_grade.getSelectedItem().toString());
-//              try{
-//              String gradedesc=txt_grade.getSelectedItem().toString();
-//              int gradeid=getGradeId(gradedesc);
-//              JOptionPane.showMessageDialog(null,gradeid);
-//              }
-//              catch(Exception e)
-//              {
-//                 JOptionPane.showMessageDialog(null,e);
-//              }
-//              pst.setInt(18,1);
-                //JOptionPane.showMessageDialog(null,gradeid);
-                              
-                pst.execute();
-                JOptionPane.showMessageDialog(null,"Record is Added Successfully");
-            }
-             catch (Exception e)
-            {
-                JOptionPane.showMessageDialog(null,e);
-            }
-            finally
-            {
-                try
-                {
-                    rs.close();
-                    pst.close();
-                }
-                catch(Exception e)
-                {
-                    JOptionPane.showMessageDialog(null,e);   
-                }
-            }
-            //clear the fields after adding the record
-            txt_id.setText("");
-            txt_firstname.setText("");
-            txt_surname.setText("");
-            txt_tel.setText("");
-            txt_dob.setDate(null);
-            txt_email.setText("");
-            txt_address.setText("");
-            txt_status.setText("");
-            txt_salary.setText("");
-            txt_add2.setText("");
-            txt_pc.setText("");
-            txt_apt.setText("");
-            txt_doj.setText("");
-            r_male.setSelected(false);
-            r_female.setSelected(false);
-//          txt_search.setText("");
-            img.setIcon(null);
-        }
-    }//GEN-LAST:event_cmd_saveActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        int ask=JOptionPane.showConfirmDialog(null,"Do you want to clear Fields ?","Clear Fields",JOptionPane.YES_NO_OPTION);
-        if(ask==0) 
-        {
-            txt_id.setText("");
-            txt_firstname.setText("");
-            txt_surname.setText("");
-            txt_tel.setText("");
-            txt_dob.setDate(null);
-            txt_email.setText("");
-            txt_address.setText("");
-            txt_status.setText("");
-            txt_salary.setText("");
-            txt_add2.setText("");
-            txt_pc.setText("");
-            txt_apt.setText("");
-            txt_doj.setText("");
-            r_male.setSelected(false);
-            r_female.setSelected(false);
-//          txt_search.setText("");
-            img.setIcon(null);
-        }    
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void txt_gradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_gradeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_gradeActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
@@ -637,6 +482,166 @@ private void Fillcombo()
             JOptionPane.showMessageDialog(null,e);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        int ask=JOptionPane.showConfirmDialog(null,"Do you want to clear Fields ?","Clear Fields",JOptionPane.YES_NO_OPTION);
+        if(ask==0)
+        {
+            txt_id.setText("");
+            txt_firstname.setText("");
+            txt_surname.setText("");
+            txt_tel.setText("");
+            txt_dob.setDate(null);
+            txt_email.setText("");
+            txt_address.setText("");
+            txt_status.setText("");
+            txt_salary.setText("");
+            txt_add2.setText("");
+            txt_pc.setText("");
+            txt_apt.setText("");
+            txt_doj.setDate(null);
+            r_male.setSelected(false);
+            r_female.setSelected(false);
+            //          txt_search.setText("");
+            img.setIcon(null);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cmd_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmd_saveActionPerformed
+        // TODO add your handling code here:
+        if(txt_firstname.getText().trim().isEmpty() ||
+            txt_surname.getText().trim().isEmpty()||
+            txt_tel.getText().trim().isEmpty()||
+            //txt_dob.getText().trim().isEmpty()||
+            txt_email.getText().trim().isEmpty()||
+            txt_tel.getText().trim().isEmpty()||
+            txt_address.getText().trim().isEmpty()||
+            //r_male.getSelectedIcon().trim().isEmpty()||
+            //person_image.imageicon().trim().isEmpty()||
+            //gender.getText().trim().isEmpty()||
+            txt_salary.getText().trim().isEmpty()||
+            txt_pc.getText().trim().isEmpty()||
+            txt_status.getText().trim().isEmpty()||
+            txt_apt.getText().trim().isEmpty())
+//          txt_doj.getText().trim().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this,"Fields are  Empty");
+            return;
+        }
+        int ask=JOptionPane.showConfirmDialog(null,"Do you want to Add Employee ?","Add Employee",JOptionPane.YES_NO_OPTION);
+        if(ask==0)
+        {
+            //Sql command for add record in the fields
+            try
+            {
+                String sql ="insert into Staff_informations"
+                + "(first_name,surname,Dob,Email,"
+                + "Telephone,Address,Department,"
+                + "Image,Salary,Gender,Address2,"
+                + "Post_code,Status,Apartment,"
+                + "Date_hired,GradeID) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+                pst=conn.prepareStatement(sql);
+                pst.setString(1,txt_firstname.getText());
+                pst.setString(2,txt_surname.getText());
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                String date=sdf.format(txt_dob.getDate());
+                pst.setString(3,date);
+                pst.setString(4,txt_email.getText());
+                pst.setString(5,txt_tel.getText());
+                pst.setString(6,txt_address.getText());
+                pst.setString(7,txt_dep.getSelectedItem().toString());
+                pst.setBytes(8,person_image);
+                pst.setString(9,txt_salary.getText());
+                pst.setString(10,gender);
+                pst.setString(11,txt_add2.getText());
+                pst.setString(12,txt_pc.getText());
+                pst.setString(13,txt_status.getText());
+                pst.setString(14,txt_apt.getText());
+//              pst.setString(15,txt_doj.getText());
+                SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd");
+                String date2=sdf1.format(txt_dob.getDate());
+                pst.setString(15,date2);
+                pst.setString(16,txt_grade.getSelectedItem().toString());
+                //              try{
+                    //              String gradedesc=txt_grade.getSelectedItem().toString();
+                    //              int gradeid=getGradeId(gradedesc);
+                    //              JOptionPane.showMessageDialog(null,gradeid);
+                    //              }
+                //              catch(Exception e)
+                //              {
+                    //                 JOptionPane.showMessageDialog(null,e);
+                    //              }
+                //              pst.setInt(18,1);
+                //JOptionPane.showMessageDialog(null,gradeid);
+
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"Record is Added Successfully");
+            }
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(null,e);
+            }
+            finally
+            {
+                try
+                {
+                    rs.close();
+                    pst.close();
+                }
+                catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null,e);
+                }
+            }
+            //clear the fields after adding the record
+            txt_id.setText("");
+            txt_firstname.setText("");
+            txt_surname.setText("");
+            txt_tel.setText("");
+            txt_dob.setDate(null);
+            txt_email.setText("");
+            txt_address.setText("");
+            txt_status.setText("");
+            txt_salary.setText("");
+            txt_add2.setText("");
+            txt_pc.setText("");
+            txt_apt.setText("");
+            txt_doj.setDate(null);
+            r_male.setSelected(false);
+            r_female.setSelected(false);
+            //          txt_search.setText("");
+            img.setIcon(null);
+        }
+    }//GEN-LAST:event_cmd_saveActionPerformed
+
+    private void txt_salaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_salaryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_salaryActionPerformed
+
+    private void txt_gradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_gradeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_gradeActionPerformed
+
+    private void txt_aptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_aptActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_aptActionPerformed
+
+    private void r_femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_femaleActionPerformed
+        gender="Female";
+        r_female.setSelected(true);
+        r_male.setSelected(false);
+    }//GEN-LAST:event_r_femaleActionPerformed
+
+    private void r_maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_maleActionPerformed
+        gender="Male";
+        r_male.setSelected(true);
+        r_female.setSelected(false);
+    }//GEN-LAST:event_r_maleActionPerformed
+
+    private void txt_firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_firstnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_firstnameActionPerformed
     public static void main(String args[]) 
     {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -703,7 +708,7 @@ private void Fillcombo()
     private javax.swing.JTextField txt_apt;
     private javax.swing.JComboBox<String> txt_dep;
     private com.toedter.calendar.JDateChooser txt_dob;
-    private javax.swing.JTextField txt_doj;
+    private com.toedter.calendar.JDateChooser txt_doj;
     private javax.swing.JTextField txt_email;
     private javax.swing.JLabel txt_emp;
     private javax.swing.JTextField txt_firstname;

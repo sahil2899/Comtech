@@ -663,7 +663,7 @@ int ask=JOptionPane.showConfirmDialog(null,"DO you want to Delete record ?","Del
         {
             String var1=txt_id.getText();
             String var2=txt_firstname.getText();
-            String var3=txt_firstname.getText();
+            String var3=txt_surname.getText();
             String var4=txt_dob.getText(); 
             String var5=txt_email.getText();
             String var6=txt_tel.getText();
