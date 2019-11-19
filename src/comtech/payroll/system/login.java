@@ -73,9 +73,9 @@ PreparedStatement pst=null;
         setUndecorated(true);
 
         kGradientPanel1.setkBorderRadius(0);
-        kGradientPanel1.setkEndColor(new java.awt.Color(0, 204, 204));
+        kGradientPanel1.setkEndColor(new java.awt.Color(0, 102, 204));
         kGradientPanel1.setkGradientFocus(600);
-        kGradientPanel1.setkStartColor(new java.awt.Color(153, 0, 153));
+        kGradientPanel1.setkStartColor(new java.awt.Color(0, 0, 0));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 153, 204));
