@@ -58,8 +58,8 @@ public class salary_cal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        salary_date = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
+        salary_date = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_salary = new javax.swing.JTable();
 
@@ -78,7 +78,7 @@ public class salary_cal extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Generate Salary For All Employees", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jLabel1.setText("Salary Cal_date");
+        jLabel1.setText("Salary Cal_month");
 
         jButton1.setText("Calculate ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,8 +95,8 @@ public class salary_cal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(salary_date, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
+                .addComponent(salary_date, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -109,9 +109,9 @@ public class salary_cal extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(salary_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(salary_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))))
                 .addGap(20, 20, 20))
         );
 
@@ -135,7 +135,7 @@ public class salary_cal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1152, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -145,7 +145,7 @@ public class salary_cal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -162,56 +162,94 @@ public class salary_cal extends javax.swing.JFrame {
 //                    + " GROUP BY id";
         try
         {
-            String sql="SELECT SUM(Allowance.Allowances) as sum,"
-            +"SUM(Allowance.Add_Allowance)AS sum_add,"
-            +"SUM(Allowance.AdditionalMedical) as A_medical,"
-            +"SUM(Allowance.AdditionalBonus) as A_bonus ,"
-            +"SUM(Allowance.AdditionalHRA) as  A_hra ,"
-            +"SUM(Allowance.AdditionalDA) as A_da,"
-            +"SI.id as SI_id,SI.Salary as SI_Salary ,"
-            +"Allowance.Allowances as Allowance_Allowances,"
-            +"Allowance.Add_Allowance as Allowance_Add_Allowance,"
-            +"Allowance.AdditionalMedical as Allowance_AdditionalMedical ,"
-            +"Allowance.AdditionalBonus as Allowance_AdditionalBonus,"
-            +"Allowance.AdditionalHRA as Allowance_AdditionalHra,"
-            +"Allowance.AdditionalDA as Allowance_AdditionalDA "
-            +"FROM Staff_informations SI " 
-            +"Left outer join Allowance On (SI.id=Allowance.Emp_id) "
-            +"GROUP BY id";
+            String sql="SELECT SI.id as SI_id,"
+                    + "SI.Salary as SI_Salary,"
+                    
+                    + "Grade.HRA as Grade_HRA,"
+                    + "Grade.DA as Grade_DA,"
+                    + "Grade.Bonus as Grade_Bonus,"
+                    + "Grade.Medical as Grade_Medical,"
+                    
+                    + "SUM(Allowance.AdditionalHRA) as Allowance_AdditionalHRA,"
+                    + "SUM(Allowance.AdditionalDA) as Allowance_AdditionalDA,"
+                    + "SUM(Allowance.AdditionalBonus) as Allowance_AdditionalBonus,"
+                    + "SUM(Allowance.AdditionalMedical) as Allowance_AdditionalMedical,"
+                    + "SUM(Allowance.OverTimeAmount) as Allowance_OverTimeAmount,"
+                    + "SUM(Allowance.Others) as Allowance_Others,"
+                    
+                    + "Deduction.Deduction_Amount as Deduction_Amount "
+                    
+                    + "from Staff_informations SI "
+                    + "Left outer join  Grade on (SI.GradeID=Grade.GradeDescription) "
+                    + "Left outer join Allowance on (SI.id=Allowance.Emp_id) "
+                    + "Left outer join Deduction on (SI.id=Deduction.Emp_id) "
+                    + "Group by id";
+            
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             while(rs.next())
             {
                 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                 String date=sdf.format(salary_date.getDate());
-               
+                
+                // Get the id and salary from staff_inforamtions table.
                 String SI_id=rs.getString("SI_id");
                 int id=Integer.parseInt(SI_id);
                 
                 String SI_Salary=rs.getString("SI_Salary");
                 int salary_cal=Integer.parseInt(SI_Salary);
-                int salary_month=salary_cal/12;
+                int salary_month=salary_cal/12;                    
                 
-                String Allowance_AdditionalMedical=rs.getString("A_Medical");
-                int medical_cal=Integer.parseInt(Allowance_AdditionalMedical);
+                //Get the gradedescriptions according to the id.
                 
-                String Allowance_AdditionalBonus=rs.getString("A_Bonus");
-                int bonus_cal=Integer.parseInt(Allowance_AdditionalBonus);
+                String Grade_da=rs.getString("Grade_DA");
+                int DA_cal=Integer.parseInt(Grade_da);
                 
-                String Allowance_AdditionalHra=rs.getString("A_hra");
-                int hra_cal=Integer.parseInt(Allowance_AdditionalHra);
+                String Grade_hra=rs.getString("Grade_HRA");
+                int HRA_cal=Integer.parseInt(Grade_hra);
                 
-                String Allowance_AdditionalDA=rs.getString("A_da");
-                int da_cal=Integer.parseInt(Allowance_AdditionalDA);
+                String Grade_bonus=rs.getString("Grade_Bonus");
+                int Bonus_cal=Integer.parseInt(Grade_bonus);
                 
-                String Allowance_Allowances=rs.getString("sum");
-                int Allowance_cal=Integer.parseInt(Allowance_Allowances);
-            
-                String Allowance_Add_Allowance=rs.getString("sum_add");
-                int Allowance_Add_cal=Integer.parseInt(Allowance_Add_Allowance);
-             
-                String sql1="insert into Salary_cal(Salary_Date,Emp_id,Salary_monthly,AdditionalMedical,"
-                        + "AdditionalBonus,AdditionalHRA,AdditionalDA,Total_allowance,Total_add) values ('"+date+"','"+id+"','"+salary_month+"','"+medical_cal+"','"+bonus_cal+"','"+hra_cal+"','"+da_cal+"','"+Allowance_cal+"','"+Allowance_Add_cal+"')";
+                String Grade_medical=rs.getString("Grade_Medical");
+                int Medical_cal=Integer.parseInt(Grade_medical);
+                
+                //Get the additional allowance details from allowance table.
+                
+                String Allowance_additionalmedical=rs.getString("Allowance_AdditionalMedical");
+                int Amedical_cal=Integer.parseInt(Allowance_additionalmedical);
+                
+                String Allowance_additionalbonus=rs.getString("Allowance_AdditionalBonus");
+                int Abonus_cal=Integer.parseInt(Allowance_additionalbonus);
+                
+                String Allowance_additionalhra=rs.getString("Allowance_AdditionalHRA");
+                int Ahra_cal=Integer.parseInt(Allowance_additionalhra);
+                
+                String Allowance_additionaldA=rs.getString("Allowance_AdditionalDA");
+                int Ada_cal=Integer.parseInt(Allowance_additionaldA);
+                
+                String Allowance_others=rs.getString("Allowance_Others");
+                int Aothers_cal=Integer.parseInt(Allowance_others);
+                
+                String Allowance_overTimeAmount=rs.getString("Allowance_OverTimeAmount");
+                int time_cal=Integer.parseInt(Allowance_overTimeAmount);
+                
+                String Deduction_Amount=rs.getString("Deduction_Amount");
+                int deduction=Integer.parseInt(Deduction_Amount);
+                
+                int total_allowance=DA_cal+HRA_cal+
+                    Bonus_cal+Medical_cal+Amedical_cal+Abonus_cal+Ahra_cal+Ada_cal+Aothers_cal+time_cal;
+                int gross_salary=total_allowance+salary_month-deduction;
+                int tax=10;
+                int tax_amount=gross_salary*tax/100;
+                int net_salary=gross_salary-tax_amount;
+                   
+                String sql1="insert into Salary_cal(Emp_id,Salary_Date,Salary,Hra,Da,Bonus,Medical,A_Medical,A_Bonus,A_DA,A_HRA,Others,O_Amount,Total_Allowance,Total_Deduction,Gross_salary,Tax,Tax_Amount,Net_Salary)"
+                        + " values ('"+id+"','"+date+"','"+salary_month+"','"+HRA_cal+"','"+DA_cal+"','"+Bonus_cal+"','"+Medical_cal+"','"+Amedical_cal+"','"+Abonus_cal+"','"+Ada_cal+"','"+Ahra_cal+"','"+Aothers_cal+"'"
+                        + ",'"+time_cal+"','"+total_allowance+"','"+deduction+"','"+gross_salary+"','"+tax+"','"+tax_amount+"','"+net_salary+"')";
+                
+                
+                
                 pst=conn.prepareStatement(sql1);
                 pst.execute();
             }
