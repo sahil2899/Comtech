@@ -5,9 +5,13 @@
  */
 package comtech.payroll.system;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -308,7 +312,9 @@ PreparedStatement pst=null;
                     txt_doj.setText(add7);
 
                     String add9 =rs.getString("Salary");
-                    txt_salary.setText(add9);
+                    int sal=Integer.parseInt(add9);
+                    String monthly=String.valueOf(sal/12);
+                    txt_salary.setText(monthly);
                 }
         }
         catch(Exception e)
@@ -337,38 +343,39 @@ PreparedStatement pst=null;
     }//GEN-LAST:event_txt_salaryActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+    
         // TODO add your handling code here:
-        String value = txt_firstname.getText();
-        String value0 = txt_surname.getText();
-        String value1 = txt_id.getText();
-        String value2 = txt_grade.getText();
-        String value3=txt_dep.getText();                                             
+        String first = txt_firstname.getText();
+        String last = txt_surname.getText();
+        String id = txt_id.getText();
+        String grade = txt_grade.getText();
+        String department=txt_dep.getText();  
+        String contact=txt_telephone.getText();
             
         JFileChooser dialog = new JFileChooser();
-        dialog.setSelectedFile(new File(value +" "+ value0+"-Salary Slip"+".pdf"));
+        dialog.setSelectedFile(new File(first +" "+ last+"-Salary Slip"+".pdf"));
         int dialogResult = dialog.showSaveDialog(null);
-        if (dialogResult==JFileChooser.APPROVE_OPTION){
-            
-        String filePath = dialog.getSelectedFile().getPath();
-       
-        
-        try 
+        if (dialogResult==JFileChooser.APPROVE_OPTION)
         {
-//            String sql ="select * from Deductions where emp_id = '"+value1+"'";
-//            pst=conn.prepareStatement(sql);
-//            rs=pst.executeQuery(); 
-//            
-//            String val = rs.getString(5);
-//            String reason = rs.getString(6);
-//            rs.close();
-//            pst.close();
-          
-              String sq ="select * from Salary_cal where Emp_id = '"+value1+"'";
-            pst=conn.prepareStatement(sq);
-            rs=pst.executeQuery(); 
-            if(rs.next()) 
+            
+            String filePath = dialog.getSelectedFile().getPath();
+            try 
             {
+//          rg3
+//          String sql ="select * from Deductions where emp_id = '"+value1+"'";
+//          pst=conn.prepareStatement(sql);
+//          rs=pst.executeQuery(); 
+//            
+//          String val = rs.getString(5);
+//          String reason = rs.getString(6);
+//          rs.close();
+//          pst.close();
+          
+                String sq ="select * from Salary_cal where Emp_id = '"+id+"'";
+                pst=conn.prepareStatement(sq);
+                rs=pst.executeQuery(); 
+                if(rs.next())
+                {
                 int calcTotal = Integer.parseInt(txt_salary.getText());
 //              float x = Float.valueOf(rs.getString(9));
 //              int v = Integer.parseInt(value);
@@ -376,61 +383,226 @@ PreparedStatement pst=null;
                 Document myDocument = new Document();
                 PdfWriter myWriter = PdfWriter.getInstance(myDocument, new FileOutputStream(filePath));
                 myDocument.open(); 
-                myDocument.add(new Paragraph("COMTECH",FontFactory.getFont(FontFactory.TIMES_BOLD,20,Font.BOLD)));
-                myDocument.add(new Paragraph("PAY SLIP",FontFactory.getFont(FontFactory.TIMES_BOLD,14,Font.BOLD)));
-                myDocument.add(new Paragraph(new Date().toString()));
+                Paragraph title=new Paragraph("PAYSLIP                                                                             COMTECH",FontFactory.getFont(FontFactory.TIMES_BOLD,18,Font.BOLD));
+                title.setAlignment(Element.ALIGN_RIGHT);
+                myDocument.add(title);
+                Paragraph title1=new Paragraph("1234,Court Road,Patran,147105,IN",FontFactory.getFont(FontFactory.TIMES_BOLD,12,Font.PLAIN));
+                title1.setAlignment(Element.ALIGN_RIGHT);
+                myDocument.add(title1);
+                Paragraph title2=new Paragraph("Phone:+918054138882,Email:Comtechlimited@gmail.com",FontFactory.getFont(FontFactory.TIMES_BOLD,12,Font.PLAIN));
+                title2.setAlignment(Element.ALIGN_RIGHT);
+                myDocument.add(title2);
                 
-                myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
+//              myDocument.add(new Paragraph(new Date().toString()));
+                
+                myDocument.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
                 myDocument.add((new Paragraph("EMPLOYEE DETAILS",FontFactory.getFont(FontFactory.TIMES_ROMAN,15,Font.BOLD))));
-                myDocument.add((new Paragraph("Name of Employee: " +value + " "+value0,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN))));
-                myDocument.add((new Paragraph("Designation: "+value2,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN))));
-                myDocument.add((new Paragraph("Department: "+value3,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN))));
-                myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
-                myDocument.add(new Paragraph("SALARY",FontFactory.getFont(FontFactory.TIMES_ROMAN,15,Font.BOLD)));
-                myDocument.add(new Paragraph("Basic Salary: "+calcTotal,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-                myDocument.add(new Paragraph("Allowances: "+rs.getString(4),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-                myDocument.add(new Paragraph("Additional Allowances: "+rs.getString(5),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//                myDocument.add(new Paragraph("Additional Allowances: "+rs.getString(5),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//           myDocument.add(new Paragraph("Overtime: "+rs.getString(2)+" Hours",FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//           myDocument.add(new Paragraph("Medical: $" +rs.getString(3),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//           myDocument.add(new Paragraph("Bonus: $"+rs.getString(4),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//           myDocument.add(new Paragraph("Other: $"+rs.getString(5),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-////           myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
-////           myDocument.add(new Paragraph("DEDUCTION",FontFactory.getFont(FontFactory.TIMES_ROMAN,15,Font.BOLD)));
-////           myDocument.add(new Paragraph("Deduction Details: "+reason,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-////           myDocument.add(new Paragraph("Total Deductions : $"+val ,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//           myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
-//           myDocument.add(new Paragraph("TOTAL PAYMENT",FontFactory.getFont(FontFactory.TIMES_ROMAN,15,Font.BOLD)));
-//           myDocument.add(new Paragraph("Total Earnings: "+rs.getString(9),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//           myDocument.add(new Paragraph("Net Pay : " +total,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//           myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
-//                     
-           myDocument.newPage();
-         myDocument.close();  
-          JOptionPane.showMessageDialog(null,"Report was successfully generated");
-        }
-           
-     }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-         
-         
-     }
-     finally {
-            
-            try{
-               rs.close();
-               pst.close();
+                myDocument.add((new Paragraph("Name of Employee: " +first+ " "+last,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN))));
+                myDocument.add((new Paragraph("Department: "+department,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN))));
+                myDocument.add((new Paragraph("Designation: "+grade,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN))));
+                myDocument.add((new Paragraph("Contact: "+contact,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN))));
+                myDocument.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
+//                Paragraph earning=new Paragraph("EARNINGS                                                                                                                          "
+//                        + "           AMOUNT",FontFactory.getFont(FontFactory.TIMES_BOLD,12,Font.BOLD));
+//                myDocument.add(earning);
+                myDocument.add(new Paragraph(" "));
+              
+                PdfPTable tab2=new PdfPTable(2);
+                tab2.setWidthPercentage(100);
+                PdfPCell cell2=new PdfPCell(new Paragraph("EARNINGS                                                                                     "
+                        + "                                    AMOUNT"));
+                cell2.setColspan(4);
+                cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell2.setBackgroundColor(BaseColor.GRAY);
+                tab2.addCell(cell2);
+                myDocument.add(tab2);
+                PdfPTable table=new PdfPTable(2);
+                table.setWidthPercentage(100);
+                PdfPTable table1=new PdfPTable(2);
+                table1.setWidthPercentage(100);
+                PdfPTable table2=new PdfPTable(2);
+                table2.setWidthPercentage(100);
+                PdfPTable table3=new PdfPTable(2);
+                table3.setWidthPercentage(100);
+                PdfPTable table4=new PdfPTable(2);
+                table4.setWidthPercentage(100);
+                PdfPTable table5=new PdfPTable(2);
+                table5.setWidthPercentage(100);
+                PdfPTable table6=new PdfPTable(2);
+                table6.setWidthPercentage(100);
+                PdfPTable table7=new PdfPTable(2);
+                table7.setWidthPercentage(100);
                 
-            }
-            catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-         
-            }
-     }
-   }
-        
+//                tab.addCell(" ");
+//                myDocument.add(tab);
+                table.addCell("House Rent Allowance");
+                myDocument.add(table);
+                table.addCell(" ");
+                myDocument.add(table);
+                
+                table1.addCell("Dearness Allowance");
+                myDocument.add(table1);
+                table1.addCell(" ");
+                myDocument.add(table1);
+                
+                table2.addCell("Medical Allowance");
+                myDocument.add(table2);
+                table2.addCell(" ");
+                myDocument.add(table2);
+                
+                table3.addCell("Bonus Allowance");
+                myDocument.add(table3);
+                table3.addCell(" ");
+                myDocument.add(table3);
+                
+                table4.addCell("Additional Allowances");
+                myDocument.add(table4);
+                table4.addCell(" ");
+                myDocument.add(table4);
+                
+                table5.addCell("Over Time ");
+                myDocument.add(table5);
+                table5.addCell(" ");
+                myDocument.add(table5);
+                
+                table6.addCell("OverTime Amount");
+                myDocument.add(table6);
+                table6.addCell(" ");
+                myDocument.add(table6);
+                
+                table7.addCell("Basic Pay");
+                myDocument.add(table7);
+                table7.addCell(" ");
+                myDocument.add(table7);
+                
+                PdfPTable tab=new PdfPTable(2);
+                tab.setWidthPercentage(100);
+                PdfPCell cell=new PdfPCell(new Paragraph("TOTAL EARNINGS                                                                                     "
+                        + "                           0.0"));
+                cell.setColspan(4);
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setBackgroundColor(BaseColor.GRAY);
+                tab.addCell(cell);
+                myDocument.add(tab);
+                
+//      Deduction fields starts here     
 
+                myDocument.add(new Paragraph(" "));
+                myDocument.add(new Paragraph(" "));
+                myDocument.add(new Paragraph(" "));
+                  
+                PdfPTable tab3=new PdfPTable(2);
+                tab3.setWidthPercentage(100);
+                PdfPCell cell3=new PdfPCell(new Paragraph("DEDUCTIONS                                                                                    "
+                        + "                                AMOUNT"));
+                cell3.setColspan(4);
+                cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell3.setBackgroundColor(BaseColor.GRAY);
+                tab3.addCell(cell3);
+                myDocument.add(tab3);
+                
+                PdfPTable tabl=new PdfPTable(2);
+                tabl.setWidthPercentage(100);
+                PdfPTable tabl1=new PdfPTable(2);
+                tabl1.setWidthPercentage(100);
+                
+                tabl.addCell("Total Leaves");
+                myDocument.add(tabl);
+                tabl.addCell(" ");
+                myDocument.add(tabl);
+                
+                tabl1.addCell("Leave Deductions");
+                myDocument.add(tabl1);
+                tabl1.addCell(" ");
+                myDocument.add(tabl1);
+                
+//              GROSS PAY CELL
+
+                PdfPTable tab4=new PdfPTable(2);
+                tab4.setWidthPercentage(100);
+                PdfPCell cell4=new PdfPCell(new Paragraph("GROSS PAY                                                                                    "
+                        + "                                         0.0"));
+                cell4.setColspan(4);
+                cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell4.setBackgroundColor(BaseColor.GRAY);
+                tab4.addCell(cell4);
+                myDocument.add(tab4);
+                
+//              TAX RATE CELL                
+                
+                PdfPTable tab5=new PdfPTable(2);
+                tab5.setWidthPercentage(50);
+                tab5.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                PdfPCell cell5=new PdfPCell(new Paragraph("TAX RATE                                                                  10%"));
+                cell5.setColspan(4);
+                cell5.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell5.setBackgroundColor(BaseColor.WHITE);
+                tab5.addCell(cell5);
+                myDocument.add(tab5);
+                
+//              TAX AMOUNT CELL
+                
+                PdfPTable tab6=new PdfPTable(2);
+                tab6.setWidthPercentage(50);
+                tab6.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                PdfPCell cell6=new PdfPCell(new Paragraph("TAX Amount                                                                  0.0"));
+                cell6.setColspan(4);
+                cell6.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell6.setBackgroundColor(BaseColor.GRAY);
+                tab6.addCell(cell6);
+                myDocument.add(tab6);
+                
+//              NET PAY CELL (FINAL CELL)
+                
+                PdfPTable tab7=new PdfPTable(2);
+                tab7.setWidthPercentage(50);
+                tab7.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                PdfPCell cell7=new PdfPCell(new Paragraph("NET PAY                                                                  0.0"));
+                cell7.setColspan(4);
+                cell7.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell7.setBackgroundColor(BaseColor.WHITE);
+                tab7.addCell(cell7);
+                myDocument.add(tab7);
+
+                
+                
+//              myDocument.add(new Paragraph("Additional Allowances: "+rs.getString(5),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+//              myDocument.add(new Paragraph("Overtime: "+rs.getString(2)+" Hours",FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+//              myDocument.add(new Paragraph("Medical: $" +rs.getString(3),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+//              myDocument.add(new Paragraph("Bonus: $"+rs.getString(4),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+//              myDocument.add(new Paragraph("Other: $"+rs.getString(5),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+////            myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
+////            myDocument.add(new Paragraph("DEDUCTION",FontFactory.getFont(FontFactory.TIMES_ROMAN,15,Font.BOLD)));
+////            myDocument.add(new Paragraph("Deduction Details: "+reason,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+////            myDocument.add(new Paragraph("Total Deductions : $"+val ,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+//              myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
+//              myDocument.add(new Paragraph("TOTAL PAYMENT",FontFactory.getFont(FontFactory.TIMES_ROMAN,15,Font.BOLD)));
+//              myDocument.add(new Paragraph("Total Earnings: "+rs.getString(9),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+//              myDocument.add(new Paragraph("Net Pay : " +total,FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+//              myDocument.add(new Paragraph("-------------------------------------------------------------------------------------------"));
+//              myDocument.newPage();
+                myDocument.close();  
+                JOptionPane.showMessageDialog(null,"Report was successfully generated");
+            }
+           
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        finally 
+        {    
+            try
+            {
+               rs.close();
+               pst.close();   
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null,e);
+            }
+        }
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
