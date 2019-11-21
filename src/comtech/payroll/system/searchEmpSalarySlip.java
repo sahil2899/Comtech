@@ -409,6 +409,9 @@ PreparedStatement pst=null;
                     String emp_Deduction=rs.getString("Total_Deduction");
                     int final_deduction=Integer.parseInt(emp_Deduction);
                     
+                    String emp_taxamount=rs.getString("Tax_Amount");
+                    int final_taxamount=Integer.parseInt(emp_taxamount);
+                     
                     int Additional_Cal=final_Amedical+final_Abonus+final_Ada+final_Ahra+final_others;
                     
                     String emp_Total_Allowance=rs.getString("Total_Allowance");
@@ -416,7 +419,8 @@ PreparedStatement pst=null;
                     int final_earning=final_cal + final_salary;
                     
                     int gross_salary=final_earning - final_deduction;
-                   
+                    
+                    int Net_pay=gross_salary-final_taxamount;
                     
                 int calcTotal = Integer.parseInt(txt_salary.getText());
                 //              float x = Float.valueOf(rs.getString(9));
@@ -425,7 +429,7 @@ PreparedStatement pst=null;
                 Document myDocument = new Document();
                 PdfWriter myWriter = PdfWriter.getInstance(myDocument, new FileOutputStream(filePath));
                 myDocument.open(); 
-                Paragraph title=new Paragraph("PAYSLIP                                                                             COMTECH",FontFactory.getFont(FontFactory.TIMES_BOLD,18,Font.BOLD));
+                Paragraph title=new Paragraph("PAYSLIP                                                                             COMTECH",FontFactory.getFont(FontFactory.TIMES_BOLD,18,Font.BOLD,BaseColor.BLACK));
                 title.setAlignment(Element.ALIGN_RIGHT);
                 myDocument.add(title);
                 Paragraph title1=new Paragraph("1234,Court Road,Patran,147105,IN",FontFactory.getFont(FontFactory.TIMES_BOLD,12,Font.PLAIN));
@@ -572,7 +576,7 @@ PreparedStatement pst=null;
                 PdfPTable tab5=new PdfPTable(2);
                 tab5.setWidthPercentage(50);
                 tab5.setHorizontalAlignment(Element.ALIGN_RIGHT);
-                PdfPCell cell5=new PdfPCell(new Paragraph("TAX RATE                                                                  10%"));
+                PdfPCell cell5=new PdfPCell(new Paragraph("TAX RATE                                                10%"));
                 cell5.setColspan(4);
                 cell5.setHorizontalAlignment(Element.ALIGN_LEFT);
                 cell5.setBackgroundColor(BaseColor.WHITE);
@@ -584,10 +588,10 @@ PreparedStatement pst=null;
                 PdfPTable tab6=new PdfPTable(2);
                 tab6.setWidthPercentage(50);
                 tab6.setHorizontalAlignment(Element.ALIGN_RIGHT);
-                PdfPCell cell6=new PdfPCell(new Paragraph("TAX Amount                                                                  0.0"));
+                PdfPCell cell6=new PdfPCell(new Paragraph("TAX Amount                                     Rs. "+final_taxamount));
                 cell6.setColspan(4);
                 cell6.setHorizontalAlignment(Element.ALIGN_LEFT);
-                cell6.setBackgroundColor(BaseColor.GRAY);
+                cell6.setBackgroundColor(BaseColor.WHITE);
                 tab6.addCell(cell6);
                 myDocument.add(tab6);
                 
@@ -596,17 +600,34 @@ PreparedStatement pst=null;
                 PdfPTable tab7=new PdfPTable(2);
                 tab7.setWidthPercentage(50);
                 tab7.setHorizontalAlignment(Element.ALIGN_RIGHT);
-                PdfPCell cell7=new PdfPCell(new Paragraph("NET PAY                                                                  0.0"));
+                PdfPCell cell7=new PdfPCell(new Paragraph("NET PAY                                          Rs. "+Net_pay));
                 cell7.setColspan(4);
                 cell7.setHorizontalAlignment(Element.ALIGN_LEFT);
-                cell7.setBackgroundColor(BaseColor.WHITE);
+                cell7.setBackgroundColor(BaseColor.GRAY);
                 tab7.addCell(cell7);
                 myDocument.add(tab7);
 
+                myDocument.add(new Paragraph(" "));
+                myDocument.add(new Paragraph(" "));
+                myDocument.add(new Paragraph("It is hereby, declared that all the allowances and basic salary has been included in this payslip for the current month of an employee. Any action can be taken only in special circumstances, if and only if, Board of Directors agree on the same note.",FontFactory.getFont(FontFactory.TIMES_BOLD,12,Font.BOLD)));
+                Paragraph par=new Paragraph("Date: ______________",FontFactory.getFont(FontFactory.TIMES_BOLD,15,Font.PLAIN));
+                par.setAlignment(Element.ALIGN_RIGHT);
+                myDocument.add(par);
+                myDocument.add(new Paragraph(" "));
+                myDocument.add(new Paragraph("Signature of the Employee                                                        Signature",FontFactory.getFont(FontFactory.TIMES_ROMAN,15,Font.BOLD)));
                 
+                myDocument.add(new Paragraph(" "));
+                myDocument.add(new Paragraph(" "));
                 
-//              myDocument.add(new Paragraph("Additional Allowances: "+rs.getString(5),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
-//              myDocument.add(new Paragraph("Overtime: "+rs.getString(2)+" Hours",FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
+                Paragraph par1=new Paragraph("If you have any questions about this payslip ,please contact:",FontFactory.getFont(FontFactory.TIMES_BOLD,12,Font.PLAIN));
+                par1.setAlignment(Element.ALIGN_CENTER);
+                myDocument.add(par1);
+                Paragraph par2=new Paragraph("      [Sahil,01764245590,comtechlimited@gmail.com]",FontFactory.getFont(FontFactory.TIMES_BOLD,12,Font.PLAIN));
+                par2.setAlignment(Element.ALIGN_CENTER);
+                myDocument.add(par2);
+
+
+
 //              myDocument.add(new Paragraph("Medical: $" +rs.getString(3),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
 //              myDocument.add(new Paragraph("Bonus: $"+rs.getString(4),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
 //              myDocument.add(new Paragraph("Other: $"+rs.getString(5),FontFactory.getFont(FontFactory.TIMES_ROMAN,10,Font.PLAIN)));
