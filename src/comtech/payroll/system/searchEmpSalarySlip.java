@@ -343,8 +343,8 @@ PreparedStatement pst=null;
     }//GEN-LAST:event_txt_salaryActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
-        // TODO add your handling code here:
+//      Salary slip button
+
         String first = txt_firstname.getText();
         String last = txt_surname.getText();
         String id = txt_id.getText();
@@ -361,25 +361,67 @@ PreparedStatement pst=null;
             String filePath = dialog.getSelectedFile().getPath();
             try 
             {
-//          rg3
-//          String sql ="select * from Deductions where emp_id = '"+value1+"'";
-//          pst=conn.prepareStatement(sql);
-//          rs=pst.executeQuery(); 
-//            
-//          String val = rs.getString(5);
-//          String reason = rs.getString(6);
-//          rs.close();
-//          pst.close();
-          
+                
                 String sq ="select * from Salary_cal where Emp_id = '"+id+"'";
                 pst=conn.prepareStatement(sq);
                 rs=pst.executeQuery(); 
                 if(rs.next())
                 {
+                    String emp_hra=rs.getString("Hra");
+                    int int_hra=Integer.parseInt(emp_hra);
+                    String final_hra=String.valueOf(int_hra);
+                    
+                    String emp_da=rs.getString("Da");
+                    int int_da=Integer.parseInt(emp_da);
+                    String final_da=String.valueOf(int_da);
+                    
+                    String emp_bonus=rs.getString("Bonus");
+                    int final_bonus=Integer.parseInt(emp_bonus);
+                    
+                    String emp_medical=rs.getString("Medical");
+                    int final_medical=Integer.parseInt(emp_medical);
+                    
+                    
+                    String emp_Amedical=rs.getString("A_Medical");
+                    int final_Amedical=Integer.parseInt(emp_Amedical);
+                    
+                    String emp_Abonus=rs.getString("A_Bonus");
+                    int final_Abonus=Integer.parseInt(emp_Abonus);
+                    
+                    String emp_Ada=rs.getString("A_DA");
+                    int final_Ada=Integer.parseInt(emp_Ada);
+                    
+                    String emp_Ahra=rs.getString("A_HRA");
+                    int final_Ahra=Integer.parseInt(emp_Ahra);
+                    
+                    String emp_overtime=rs.getString("O_Amount");
+                    int final_overtime=Integer.parseInt(emp_overtime);
+                    
+                    String emp_others=rs.getString("Others");
+                    int final_others=Integer.parseInt(emp_others);
+                    
+                    String emp_salary=rs.getString("Salary");
+                    int final_salary=Integer.parseInt(emp_salary);
+                    
+                    String emp_leave=rs.getString("all_leave");
+                    int final_leave=Integer.parseInt(emp_leave);
+                    
+                    String emp_Deduction=rs.getString("Total_Deduction");
+                    int final_deduction=Integer.parseInt(emp_Deduction);
+                    
+                    int Additional_Cal=final_Amedical+final_Abonus+final_Ada+final_Ahra+final_others;
+                    
+                    String emp_Total_Allowance=rs.getString("Total_Allowance");
+                    int final_cal=Integer.parseInt(emp_Total_Allowance);
+                    int final_earning=final_cal + final_salary;
+                    
+                    int gross_salary=final_earning - final_deduction;
+                   
+                    
                 int calcTotal = Integer.parseInt(txt_salary.getText());
-//              float x = Float.valueOf(rs.getString(9));
-//              int v = Integer.parseInt(value);
-//              float total = calcTotal+ x;
+                //              float x = Float.valueOf(rs.getString(9));
+                //              int v = Integer.parseInt(value);
+                //              float total = calcTotal+ x;
                 Document myDocument = new Document();
                 PdfWriter myWriter = PdfWriter.getInstance(myDocument, new FileOutputStream(filePath));
                 myDocument.open(); 
@@ -410,7 +452,7 @@ PreparedStatement pst=null;
                 PdfPTable tab2=new PdfPTable(2);
                 tab2.setWidthPercentage(100);
                 PdfPCell cell2=new PdfPCell(new Paragraph("EARNINGS                                                                                     "
-                        + "                                    AMOUNT"));
+                        + "                                  AMOUNT"));
                 cell2.setColspan(4);
                 cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
                 cell2.setBackgroundColor(BaseColor.GRAY);
@@ -426,66 +468,64 @@ PreparedStatement pst=null;
                 table3.setWidthPercentage(100);
                 PdfPTable table4=new PdfPTable(2);
                 table4.setWidthPercentage(100);
-                PdfPTable table5=new PdfPTable(2);
-                table5.setWidthPercentage(100);
+//                PdfPTable table5=new PdfPTable(2);
+//                table5.setWidthPercentage(100);
                 PdfPTable table6=new PdfPTable(2);
                 table6.setWidthPercentage(100);
                 PdfPTable table7=new PdfPTable(2);
                 table7.setWidthPercentage(100);
                 
-//                tab.addCell(" ");
-//                myDocument.add(tab);
                 table.addCell("House Rent Allowance");
                 myDocument.add(table);
-                table.addCell(" ");
+                table.addCell("                                                                 "+final_hra);
+                
                 myDocument.add(table);
                 
                 table1.addCell("Dearness Allowance");
                 myDocument.add(table1);
-                table1.addCell(" ");
+                table1.addCell("                                                                 "+final_da);
                 myDocument.add(table1);
                 
                 table2.addCell("Medical Allowance");
                 myDocument.add(table2);
-                table2.addCell(" ");
+                table2.addCell("                                                                 "+final_bonus);
                 myDocument.add(table2);
                 
                 table3.addCell("Bonus Allowance");
                 myDocument.add(table3);
-                table3.addCell(" ");
+                table3.addCell("                                                                 "+final_medical);
                 myDocument.add(table3);
                 
                 table4.addCell("Additional Allowances");
                 myDocument.add(table4);
-                table4.addCell(" ");
+                table4.addCell("                                                                 "+Additional_Cal);
                 myDocument.add(table4);
                 
-                table5.addCell("Over Time ");
-                myDocument.add(table5);
-                table5.addCell(" ");
-                myDocument.add(table5);
+//                table5.addCell("Over Time ");
+//                myDocument.add(table5);
+//                table5.addCell("                                                                 "+final_overtime);
+//                myDocument.add(table5);
                 
                 table6.addCell("OverTime Amount");
                 myDocument.add(table6);
-                table6.addCell(" ");
+                table6.addCell("                                                                 "+final_overtime);
                 myDocument.add(table6);
                 
                 table7.addCell("Basic Pay");
                 myDocument.add(table7);
-                table7.addCell(" ");
+                table7.addCell("                                                                 "+final_salary);
                 myDocument.add(table7);
                 
                 PdfPTable tab=new PdfPTable(2);
                 tab.setWidthPercentage(100);
-                PdfPCell cell=new PdfPCell(new Paragraph("TOTAL EARNINGS                                                                                     "
-                        + "                           0.0"));
+                PdfPCell cell=new PdfPCell(new Paragraph("TOTAL EARNINGS                                                                                                        Rs. "+final_earning));
                 cell.setColspan(4);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 cell.setBackgroundColor(BaseColor.GRAY);
                 tab.addCell(cell);
                 myDocument.add(tab);
                 
-//      Deduction fields starts here     
+//              Deduction fields starts here     
 
                 myDocument.add(new Paragraph(" "));
                 myDocument.add(new Paragraph(" "));
@@ -508,20 +548,19 @@ PreparedStatement pst=null;
                 
                 tabl.addCell("Total Leaves");
                 myDocument.add(tabl);
-                tabl.addCell(" ");
+                tabl.addCell("                                                                 "+final_leave);
                 myDocument.add(tabl);
                 
                 tabl1.addCell("Leave Deductions");
                 myDocument.add(tabl1);
-                tabl1.addCell(" ");
+                tabl1.addCell("                                                                 "+final_deduction);
                 myDocument.add(tabl1);
                 
 //              GROSS PAY CELL
 
                 PdfPTable tab4=new PdfPTable(2);
                 tab4.setWidthPercentage(100);
-                PdfPCell cell4=new PdfPCell(new Paragraph("GROSS PAY                                                                                    "
-                        + "                                         0.0"));
+                PdfPCell cell4=new PdfPCell(new Paragraph("GROSS PAY                                                                                                                  Rs. "+gross_salary));
                 cell4.setColspan(4);
                 cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
                 cell4.setBackgroundColor(BaseColor.GRAY);

@@ -154,12 +154,7 @@ public class salary_cal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-//String sql="SELECT SUM(Allowance.Allowances) as sum,SUM(Allowance.Add_Allowance)AS \"sum_add\""
-//                    + ",SI.id as SI_id,SI.Salary as SI_Salary,Allowance.Allowances as Allowance_Allowances,Allowance.Add_Allowance as Allowance_Add_Allowance "
-//                    + "FROM Staff_informations SI "
-//                    + "Left outer join Allowance On (SI.id=Allowance.Emp_id)"
-//                    + " GROUP BY id";
+
         try
         {
             String sql="SELECT SI.id as SI_id,"
@@ -176,7 +171,7 @@ public class salary_cal extends javax.swing.JFrame {
                     + "SUM(Allowance.AdditionalMedical) as Allowance_AdditionalMedical,"
                     + "SUM(Allowance.OverTimeAmount) as Allowance_OverTimeAmount,"
                     + "SUM(Allowance.Others) as Allowance_Others,"
-                    
+                    + "Deduction.Total_leave as Deduction_Total_leave,"
                     + "Deduction.Deduction_Amount as Deduction_Amount "
                     
                     + "from Staff_informations SI "
@@ -185,12 +180,12 @@ public class salary_cal extends javax.swing.JFrame {
                     + "Left outer join Deduction on (SI.id=Deduction.Emp_id) "
                     + "Group by id";
             
-            pst=conn.prepareStatement(sql);
-            rs=pst.executeQuery();
-            while(rs.next())
-            {
-                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-                String date=sdf.format(salary_date.getDate());
+                    pst=conn.prepareStatement(sql);
+                    rs=pst.executeQuery();
+                    while(rs.next())
+                    {
+                        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                         String date=sdf.format(salary_date.getDate());
                 
                 // Get the id and salary from staff_inforamtions table.
                 String SI_id=rs.getString("SI_id");
@@ -237,6 +232,9 @@ public class salary_cal extends javax.swing.JFrame {
                 String Deduction_Amount=rs.getString("Deduction_Amount");
                 int deduction=Integer.parseInt(Deduction_Amount);
                 
+                String Deduction_Total_leave=rs.getString("Deduction_Total_leave");
+                int total_leave=Integer.parseInt(Deduction_Total_leave);
+                
                 int total_allowance=DA_cal+HRA_cal+
                     Bonus_cal+Medical_cal+Amedical_cal+Abonus_cal+Ahra_cal+Ada_cal+Aothers_cal+time_cal;
                 int gross_salary=total_allowance+salary_month-deduction;
@@ -244,9 +242,9 @@ public class salary_cal extends javax.swing.JFrame {
                 int tax_amount=gross_salary*tax/100;
                 int net_salary=gross_salary-tax_amount;
                    
-                String sql1="insert into Salary_cal(Emp_id,Salary_Date,Salary,Hra,Da,Bonus,Medical,A_Medical,A_Bonus,A_DA,A_HRA,Others,O_Amount,Total_Allowance,Total_Deduction,Gross_salary,Tax,Tax_Amount,Net_Salary)"
+                String sql1="insert into Salary_cal(Emp_id,Salary_Date,Salary,Hra,Da,Bonus,Medical,A_Medical,A_Bonus,A_DA,A_HRA,Others,O_Amount,Total_Allowance,all_leave,Total_Deduction,Gross_salary,Tax,Tax_Amount,Net_Salary)"
                         + " values ('"+id+"','"+date+"','"+salary_month+"','"+HRA_cal+"','"+DA_cal+"','"+Bonus_cal+"','"+Medical_cal+"','"+Amedical_cal+"','"+Abonus_cal+"','"+Ada_cal+"','"+Ahra_cal+"','"+Aothers_cal+"'"
-                        + ",'"+time_cal+"','"+total_allowance+"','"+deduction+"','"+gross_salary+"','"+tax+"','"+tax_amount+"','"+net_salary+"')";
+                        + ",'"+time_cal+"','"+total_allowance+"','"+total_leave+"','"+deduction+"','"+gross_salary+"','"+tax+"','"+tax_amount+"','"+net_salary+"')";
                 
                 
                 
