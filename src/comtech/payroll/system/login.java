@@ -232,7 +232,7 @@ PreparedStatement pst=null;
                 if(count==1)
                 {
 //                    JOptionPane.showMessageDialog(null,"successfully Login");
-                    MainMenu j=new MainMenu();
+                    Menu_final j=new Menu_final();
                     j.setVisible(true);
                     this.dispose();
                 }

@@ -39,6 +39,7 @@ public class Opening_screen extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
+        kGradientPanel1.setkBorderRadius(0);
         kGradientPanel1.setkEndColor(new java.awt.Color(0, 102, 204));
         kGradientPanel1.setkStartColor(new java.awt.Color(0, 0, 0));
 
@@ -152,6 +153,7 @@ public class Opening_screen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Opening_screen().setVisible(true);
+                
             }
         });
     }

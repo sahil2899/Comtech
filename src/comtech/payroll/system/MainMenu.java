@@ -37,15 +37,16 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbl_emp = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle6 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle5 = new rojerusan.RSMaterialButtonRectangle();
-        rSMaterialButtonRectangle4 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle7 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle8 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle9 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle10 = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusTraversalPolicyProvider(true);
         setResizable(false);
@@ -119,15 +120,6 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        rSMaterialButtonRectangle3.setText("Employee Management");
-        rSMaterialButtonRectangle3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rSMaterialButtonRectangle3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSMaterialButtonRectangle3ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(rSMaterialButtonRectangle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
-
         rSMaterialButtonRectangle2.setText("Update Salary");
         rSMaterialButtonRectangle2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rSMaterialButtonRectangle2.addActionListener(new java.awt.event.ActionListener() {
@@ -153,16 +145,7 @@ public class MainMenu extends javax.swing.JFrame {
                 rSMaterialButtonRectangle5ActionPerformed(evt);
             }
         });
-        jPanel2.add(rSMaterialButtonRectangle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
-
-        rSMaterialButtonRectangle4.setText("Allowances");
-        rSMaterialButtonRectangle4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rSMaterialButtonRectangle4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSMaterialButtonRectangle4ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(rSMaterialButtonRectangle4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
+        jPanel2.add(rSMaterialButtonRectangle5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, -1, -1));
 
         rSMaterialButtonRectangle7.setText("Add Employee");
         rSMaterialButtonRectangle7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -181,6 +164,24 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(rSMaterialButtonRectangle8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, -1, -1));
+
+        rSMaterialButtonRectangle9.setText("Employee Management");
+        rSMaterialButtonRectangle9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rSMaterialButtonRectangle9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle9ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(rSMaterialButtonRectangle9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+
+        rSMaterialButtonRectangle10.setText("Allowances");
+        rSMaterialButtonRectangle10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rSMaterialButtonRectangle10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle10ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(rSMaterialButtonRectangle10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 890, 490));
 
@@ -207,12 +208,6 @@ public class MainMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_rSButtonIconD1ActionPerformed
 
-    private void rSMaterialButtonRectangle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle3ActionPerformed
-        // TODO add your handling code here:
-        Search_Employee add1=new Search_Employee();
-        add1.setVisible(true);
-    }//GEN-LAST:event_rSMaterialButtonRectangle3ActionPerformed
-
     private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
         // TODO add your handling code here:
         UpdateSalary sal=new UpdateSalary();
@@ -232,12 +227,6 @@ public class MainMenu extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_rSMaterialButtonRectangle5ActionPerformed
 
-    private void rSMaterialButtonRectangle4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle4ActionPerformed
-        // TODO add your handling code here:
-        Allowances allowance=new Allowances();
-        allowance.setVisible(true);
-    }//GEN-LAST:event_rSMaterialButtonRectangle4ActionPerformed
-
     private void rSMaterialButtonRectangle7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle7ActionPerformed
         // TODO add your handling code here:
        
@@ -247,7 +236,16 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void rSMaterialButtonRectangle8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle8ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_rSMaterialButtonRectangle8ActionPerformed
+
+    private void rSMaterialButtonRectangle9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSMaterialButtonRectangle9ActionPerformed
+
+    private void rSMaterialButtonRectangle10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSMaterialButtonRectangle10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,12 +290,12 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lbl_emp;
     private rojerusan.RSButtonIconD rSButtonIconD1;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle10;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle4;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle5;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle6;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle7;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle8;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle9;
     // End of variables declaration//GEN-END:variables
 }
