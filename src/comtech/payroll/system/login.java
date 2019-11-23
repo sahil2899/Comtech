@@ -20,14 +20,17 @@ public class login extends javax.swing.JFrame {
 Connection conn=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
-
+ImageIcon icon;
     /**
      * Creates new form login_gradient
      */
     public login() {
         initComponents();
+        icon =new ImageIcon("C:\\Users\\sahil mittal\\Documents\\NetBeansProjects\\comtech payroll system\\Final_Images\\Jframe_icon.png");
+        setIconImage(icon.getImage());
         conn=db.java_db();
         this.icon2.setVisible(false);
+        
     }
 
     /**

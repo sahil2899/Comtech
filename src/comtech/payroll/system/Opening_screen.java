@@ -5,17 +5,15 @@
  */
 package comtech.payroll.system;
 
-/**
- *
- * @author sahil mittal
- */
+import javax.swing.ImageIcon;
+
 public class Opening_screen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Opening_screen
-     */
+    ImageIcon icon;
     public Opening_screen() {
         initComponents();
+        icon =new ImageIcon("C:\\Users\\sahil mittal\\Documents\\NetBeansProjects\\comtech payroll system\\Final_Images\\Jframe_icon.png");
+        setIconImage(icon.getImage());
     }
 
     /**

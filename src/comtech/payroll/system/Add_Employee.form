@@ -142,12 +142,22 @@
                               <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="txt_apt" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
-                              <Component id="txt_pc" min="-2" pref="250" max="-2" attributes="0"/>
-                              <Component id="txt_add2" min="-2" pref="250" max="-2" attributes="0"/>
-                              <Component id="txt_address" min="-2" pref="250" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="58" pref="58" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txt_address" min="-2" pref="250" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="txt_apt" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                                          <Component id="txt_add2" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txt_pc" min="-2" pref="156" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -364,12 +374,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Address Line 2 :"/>
+            <Property name="text" type="java.lang.String" value="Address 2*"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Apt./House No :"/>
+            <Property name="text" type="java.lang.String" value="House No *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">

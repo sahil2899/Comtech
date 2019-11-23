@@ -177,9 +177,9 @@ private void Fillcombo()
 
         jLabel8.setText("Address Line 1 :");
 
-        jLabel14.setText("Address Line 2 :");
+        jLabel14.setText("Address 2*");
 
-        jLabel15.setText("Apt./House No :");
+        jLabel15.setText("House No *");
 
         jLabel16.setText("Post Code :");
 
@@ -301,12 +301,18 @@ private void Fillcombo()
                             .addComponent(jLabel15)
                             .addComponent(jLabel16)
                             .addComponent(jLabel8))
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_apt, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_pc, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_add2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_apt, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_add2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_pc, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(94, 94, 94)))))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -551,8 +557,8 @@ private void Fillcombo()
                 + "(first_name,surname,Dob,Email,"
                 + "Telephone,Address,Department,"
                 + "Image,Salary,Gender,Address2,"
-                + "Post_code,Status,Apartment,"
-                + "Date_hired,GradeID) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+                + "Post_code,Apartment,"
+                + "Date_hired,GradeID) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
                 pst=conn.prepareStatement(sql);
                 pst.setString(1,txt_firstname.getText());
                 pst.setString(2,txt_surname.getText());
@@ -569,12 +575,12 @@ private void Fillcombo()
                 pst.setString(11,txt_add2.getText());
                 pst.setString(12,txt_pc.getText());
 //                pst.setString(13,txt_status.getText());
-                pst.setString(14,txt_apt.getText());
+                pst.setString(13,txt_apt.getText());
                 //              pst.setString(15,txt_doj.getText());
                 SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd");
                 String date2=sdf1.format(txt_dob.getDate());
-                pst.setString(15,date2);
-                pst.setString(16,txt_grade.getSelectedItem().toString());
+                pst.setString(14,date2);
+                pst.setString(15,txt_grade.getSelectedItem().toString());
                 //              try{
                     //              String gradedesc=txt_grade.getSelectedItem().toString();
                     //              int gradeid=getGradeId(gradedesc);
