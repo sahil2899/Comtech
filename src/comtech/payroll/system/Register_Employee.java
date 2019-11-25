@@ -35,7 +35,7 @@ public class Register_Employee extends javax.swing.JFrame
         Fillcombo();
         icon =new ImageIcon("C:\\Users\\sahil mittal\\Documents\\NetBeansProjects\\comtech payroll system\\Final_Images\\Jframe_icon.png");
         setIconImage(icon.getImage());
-//        txt_emp.setText(Emp.empusername);
+//      txt_emp.setText(Emp.empusername);
     }
     private void Fillcombo()
     {

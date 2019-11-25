@@ -230,8 +230,8 @@ public class MainMenu extends javax.swing.JFrame {
     private void rSMaterialButtonRectangle7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle7ActionPerformed
         // TODO add your handling code here:
        
-        Add_Employee add3=new Add_Employee();
-        add3.setVisible(true);
+      
+        
     }//GEN-LAST:event_rSMaterialButtonRectangle7ActionPerformed
 
     private void rSMaterialButtonRectangle8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle8ActionPerformed

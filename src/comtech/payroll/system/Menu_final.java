@@ -41,6 +41,11 @@ public class Menu_final extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         add_employee1 = new javax.swing.JButton();
         add_employee = new javax.swing.JButton();
+        add_employee3 = new javax.swing.JButton();
+        add_employee5 = new javax.swing.JButton();
+        add_employee2 = new javax.swing.JButton();
+        add_employee4 = new javax.swing.JButton();
+        add_employee6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lbl_emp = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -77,16 +82,61 @@ public class Menu_final extends javax.swing.JFrame
                 add_employee1ActionPerformed(evt);
             }
         });
-        jPanel1.add(add_employee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 220, 70));
+        jPanel1.add(add_employee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 220, 70));
 
         add_employee.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        add_employee.setText("Register Employee");
+        add_employee.setText("Payslip");
         add_employee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_employeeActionPerformed(evt);
             }
         });
-        jPanel1.add(add_employee, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 180, 70));
+        jPanel1.add(add_employee, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, 210, 70));
+
+        add_employee3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        add_employee3.setText("Update Salary");
+        add_employee3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_employee3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(add_employee3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 210, 70));
+
+        add_employee5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        add_employee5.setText("Deductions");
+        add_employee5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_employee5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(add_employee5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 220, 70));
+
+        add_employee2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        add_employee2.setText("Register Employee");
+        add_employee2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_employee2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(add_employee2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 220, 70));
+
+        add_employee4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        add_employee4.setText("Allowances");
+        add_employee4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_employee4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(add_employee4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 220, 70));
+
+        add_employee6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        add_employee6.setText("Salary Calculation");
+        add_employee6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_employee6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(add_employee6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, 210, 70));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -187,7 +237,7 @@ public class Menu_final extends javax.swing.JFrame
 
     private void add_employeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_employeeActionPerformed
         // TODO add your handling code here:
-        Register_Employee object=new Register_Employee();
+       Employee_Payslip object=new Employee_Payslip();
         object.setVisible(true);
     }//GEN-LAST:event_add_employeeActionPerformed
 
@@ -215,6 +265,35 @@ public class Menu_final extends javax.swing.JFrame
         Employee_Management object=new Employee_Management();
         object.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void add_employee2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_employee2ActionPerformed
+        // TODO add your handling code here:
+        Register_Employee object=new Register_Employee();
+        object.setVisible(true);
+    }//GEN-LAST:event_add_employee2ActionPerformed
+
+    private void add_employee3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_employee3ActionPerformed
+        Update_Salary object=new Update_Salary();
+        object.setVisible(true);
+    }//GEN-LAST:event_add_employee3ActionPerformed
+
+    private void add_employee4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_employee4ActionPerformed
+        // TODO add your handling code here:
+        Employee_Allowances object=new Employee_Allowances();
+        object.setVisible(true);
+    }//GEN-LAST:event_add_employee4ActionPerformed
+
+    private void add_employee5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_employee5ActionPerformed
+        // TODO add your handling code here:
+        Employee_Deductions object=new Employee_Deductions();
+        object.setVisible(true);
+    }//GEN-LAST:event_add_employee5ActionPerformed
+
+    private void add_employee6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_employee6ActionPerformed
+        // TODO add your handling code here:
+        Employee_Salary object=new Employee_Salary();
+        object.setVisible(true);
+    }//GEN-LAST:event_add_employee6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,6 +334,11 @@ public class Menu_final extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_employee;
     private javax.swing.JButton add_employee1;
+    private javax.swing.JButton add_employee2;
+    private javax.swing.JButton add_employee3;
+    private javax.swing.JButton add_employee4;
+    private javax.swing.JButton add_employee5;
+    private javax.swing.JButton add_employee6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
